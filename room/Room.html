@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客房管理子系统</title>
+    <link rel="stylesheet" href="../roomStyle/room.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <h1 class="sidebar-title">客房管理子系统</h1>
+    <nav class="menu">
+        <ul>
+            <li><a href="#booking">客房预订</a></li>
+            <li><a href="#room-status">客房状态</a></li>
+            <li><a href="#check-in-out">入住退房</a></li>
+            <li><a href="#room-service">客房服务</a></li>
+            <li><a href="#fee-settle">费用结算</a></li>
+            <li><a href="#customer-manage">客户管理</a></li>
+            <li><a href="#data-analysis">数据报表</a></li>
+        </ul>
+    </nav>
+</div>
+
+<main>
+    <section id="booking" class="active">
+        <h2>客房预订</h2>
+        <div class="card">
+            <h3>新增线上预订</h3>
+            <div class="card">
+                <h3>预订表单</h3>
+                <div class="form-group">
+                    <label>客人姓名:</label>
+                    <input type="text" id="guestName" placeholder="请输入客人姓名">
+                </div>
+                <div class="form-group">
+                    <label>联系电话:</label>
+                    <input type="tel" id="guestPhone" placeholder="请输入联系电话">
+                </div>
+                <div class="form-group">
+                    <label>入住日期:</label>
+                    <input type="date" id="checkInDate">
+                </div>
+                <div class="form-group">
+                    <label>退房日期:</label>
+                    <input type="date" id="checkOutDate">
+                </div>
+                <div class="form-group">
+                    <label>客房类型:</label>
+                    <select id="roomType">
+                        <option value="标准间">标准间 (¥200/晚)</option>
+                        <option value="豪华间">豪华间 (¥350/晚)</option>
+                        <option value="套房">套房 (¥600/晚)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>入住人数:</label>
+                    <input type="number" id="guestCount" min="1" max="4" value="1">
+                </div>
+                <button class="btn-primary" onclick="bookRoom()">提交预订</button>
+            </div>
+        </div>
+        <div class="card">
+            <h3>预订记录管理</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>预订编号</th>
+                    <th>客户姓名</th>
+                    <th>房型</th>
+                    <th>入住时间</th>
+                    <th>退房时间</th>
+                    <th>预订状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="bookingTable">
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <section id="room-status">
+        <h2>客房状态管理</h2>
+        <div class="card">
+            <h3>实时房态总览</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>房间号</th>
+                    <th>客房类型</th>
+                    <th>售价(元/晚)</th>
+                    <th>房间状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>101</td>
+                    <td>标准双人间</td>
+                    <td>268</td>
+                    <td class="status-free">空房</td>
+                    <td>
+                        <button class="btn-primary">编辑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>豪华大床房</td>
+                    <td>368</td>
+                    <td class="status-occupied">在住</td>
+                    <td>
+                        <button class="btn-primary">编辑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>103</td>
+                    <td>商务双床房</td>
+                    <td>428</td>
+                    <td class="status-booked">已预订</td>
+                    <td>
+                        <button class="btn-primary">编辑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>201</td>
+                    <td>行政套房</td>
+                    <td>658</td>
+                    <td>维修中</td>
+                    <td>
+                        <button class="btn-primary">编辑</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <section id="check-in-out">
+        <h2>入住退房办理</h2>
+        <div class="card">
+            <h3>客人入住办理</h3>
+            <div class="form-group">
+                <label>选择预订订单</label>
+                <select>
+                    <option value="">--请选择待入住订单--</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label>身份证号码</label>
+                <input type="text" placeholder="身份验证">
+            </div>
+            <div class="form-group">
+                <label>押金金额</label>
+                <input type="number" value="300">
+            </div>
+            <button class="btn-success">确认入住</button>
+        </div>
+        <div class="card">
+            <h3>当前在住客人</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>房间号</th>
+                    <th>客人姓名</th>
+                    <th>入住日期</th>
+                    <th>押金</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>102</td>
+                    <td>张女士</td>
+                    <td>2026-04-23</td>
+                    <td>300元</td>
+                    <td>
+                        <button class="btn-danger">办理退房</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="room-service">
+        <h2>客房服务与维护</h2>
+        <div class="card">
+            <h3>服务申请登记</h3>
+            <div class="form-group">
+                <label>房间号</label>
+                <input type="text" placeholder="例如：102">
+            </div>
+            <div class="form-group">
+                <label>服务类型</label>
+                <select>
+                    <option>客房清洁打扫</option>
+                    <option>洗漱用品补充</option>
+                    <option>水电设备报修</option>
+                    <option>加急打扫/整理</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>需求备注</label>
+                <input type="text" placeholder="填写详细要求">
+            </div>
+            <button class="btn-primary">提交申请</button>
+        </div>
+        <div class="card">
+            <h3>服务进度跟踪</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>房间号</th>
+                    <th>服务类型</th>
+                    <th>提交时间</th>
+                    <th>处理状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>205</td>
+                    <td>客房清洁</td>
+                    <td>2026-04-25 09:20</td>
+                    <td>待处理</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <section id="fee-settle">
+        <h2>费用结算管理</h2>
+        <div class="card">
+            <h3>账单结算</h3>
+            <div class="form-group">
+                <label>在住房间号</label>
+                <input type="text" placeholder="输入房间号">
+            </div>
+            <div class="form-group">
+                <label>额外消费</label>
+                <input type="number" value="0" placeholder="零食/酒水/服务">
+            </div>
+            <div class="form-group">
+                <label>支付方式</label>
+                <select>
+                    <option>现金支付</option>
+                    <option>银行卡</option>
+                    <option>微信支付</option>
+                    <option>支付宝</option>
+                </select>
+            </div>
+            <button class="btn-primary">结算账单</button>
+        </div>
+        <div class="card">
+            <h3>结算记录</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>账单编号</th>
+                    <th>房间</th>
+                    <th>消费总额</th>
+                    <th>支付方式</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>FD2026042501</td>
+                    <td>302</td>
+                    <td>896元</td>
+                    <td>微信支付</td>
+                    <td>已结清</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="customer-manage">
+        <h2>客户信息管理</h2>
+        <div class="card">
+            <h3>客户档案</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>联系方式</th>
+                    <th>会员等级</th>
+                    <th>入住次数</th>
+                    <th>消费偏好</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>王先生</td>
+                    <td>135****6789</td>
+                    <td>银卡会员</td>
+                    <td>8</td>
+                    <td>偏好高楼层</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <h3>客户满意度与反馈</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>顾客</th>
+                    <th>反馈内容</th>
+                    <th>满意度</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>李先生</td>
+                    <td>环境整洁，服务周到</td>
+                    <td>满意</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="data-analysis">
+        <h2>数据统计与分析</h2>
+        <div class="stats">
+            <div class="stat-card">
+                <h4>总客房数量</h4>
+                <p>36</p>
+            </div>
+            <div class="stat-card">
+                <h4>当前空房</h4>
+                <p>16</p>
+            </div>
+            <div class="stat-card">
+                <h4>本月入住率</h4>
+                <p>72%</p>
+            </div>
+            <div class="stat-card">
+                <h4>月度总收入</h4>
+                <p>¥52860</p>
+            </div>
+        </div>
+        <div class="card">
+            <h3>业务报表</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>月份</th>
+                    <th>客房收入</th>
+                    <th>服务收入</th>
+                    <th>总营收</th>
+                    <th>入住率</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2026-03</td>
+                    <td>46200</td>
+                    <td>6300</td>
+                    <td>52500</td>
+                    <td>68%</td>
+                </tr>
+                <tr>
+                    <td>2026-04</td>
+                    <td>48600</td>
+                    <td>4260</td>
+                    <td>52860</td>
+                    <td>72%</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<script src="room.js"></script>
+</body>
+</html>

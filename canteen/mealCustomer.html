@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="./styleCus.css">
+</head>
+<body>
+<header>
+    <h1>Catering Service</h1>
+    <nav>
+        <ul>
+            <li><a href="#booking">Table Reservation</a></li>
+            <li><a href="#ordering">Self-service Ordering</a></li>
+            <li><a href="#analytics">Data & Feedback</a></li>
+        </ul>
+    </nav>
+</header>
+
+<hr>
+
+<main>
+    <section id="booking">
+        <h2>Online Table Reservation</h2>
+        <form>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <label for="guests">Number of diners:</label>
+            <input type="number" id="guests" name="guests" min="1" required>
+
+            <button type="submit">confirm</button>
+        </form>
+    </section>
+
+    <hr>
+
+    <section id="ordering">
+        <h2>Self-service ordering area</h2>
+
+        <div class="recommendations">
+            <h3>Recommendation</h3>
+            <ul>
+                <li>Signature Roast Duck<span>Sales champion</span>
+                    <div>
+                        <img src="duck.jpg" alt="Roast Duck" width="15%">
+                    </div>
+                </li>
+                <li>Salad<span>Healthy Low Fat</span>
+                    <div>
+                        <img src="salad.jpg" alt="Salad" width="15%">
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <form onsubmit="return submitMeal()">
+            <fieldset>
+                <legend>Select Dishes</legend>
+                <input type="checkbox" id="dish1" name="dish" value="Braised Pork" onchange="orderMeal()">
+                <label for="dish1">Braised Pork</label>
+                <div>
+                    <img src="red-cooked%20pork.png" alt="pork" width="15%">
+                </div>
+                <div class="price">
+                    <span>--56yuan</span>
+                </div>
+                <select name="taste1">
+                    <option value="normal">Normal</option>
+                    <option value="less-salt">Less Salt</option>
+                </select>
+                <br>
+                <input type="checkbox" id="dish2" name="dish" value="Roast Duck" onchange="orderMeal()">
+                <label for="dish2">Roast Duck</label>
+                <div>
+                    <img src="duck.jpg" alt="Roast Duck" width="15%">
+                </div>
+                <div class="price">
+                    <span>--128yuan</span>
+                </div>
+                <br>
+                <input type="checkbox" id="dish3" name="dish" value="Salad" onchange="orderMeal()">
+                <label for="dish3">Salad</label>
+                <div>
+                    <img src="salad.jpg" alt="Salad" width="15%">
+                </div>
+                <div class="price">
+                    <span>--34yuan</span>
+                </div>
+                <br>
+                <input type="checkbox" id="dish4" name="dish" value="Tomato Egg Soup" onchange="orderMeal()">
+                <label for="dish4">Tomato Egg Soup</label>
+                <div>
+                    <img src="soup.jpg" alt="Tomato Egg Soup" width="15%">
+                </div>
+                <div class="price">
+                    <span>--36yuan</span>
+                </div>
+                <br>
+                <input type="checkbox" id="dish5" name="dish" value="Set Meal A For Two" onchange="orderMeal()">
+                <label for="dish5">Set Meal A For Two</label>
+                <div>
+                    <ul>
+                        <li>
+                            <span>Signature Roast Duck</span>
+                        </li>
+                        <li>
+                            <span>Seasonal Vegetable Salad</span>
+                        </li>
+                        <li>
+                            <span>Tomato Egg Soup</span>
+                        </li>
+                        <li>
+                            <span>Two Bowls of Rice</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="price">
+                    <span>--198yuan</span>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Dining Method</legend>
+                <input type="radio" id="dine-in" name="dining-type" value="dine-in" checked>
+                <label for="dine-in">Dine-in</label>
+                <select name="diningNumber" id="table">
+                    <option value="1">Table 1</option>
+                    <option value="2">Table 2</option>
+                    <option value="3">Table 3</option>
+                    <option value="4">Table 4</option>
+                    <option value="5">Table 5</option>
+                    <option value="6">Table 6</option>
+                    <option value="7">Table 7</option>
+                    <option value="8">Table 8</option>
+                </select>
+                <input type="radio" id="takeaway" name="dining-type" value="takeaway">
+                <label for="takeaway">Takeaway Delivery</label>
+            </fieldset>
+            <fieldset>
+                <legend>Selected Dishes</legend>
+                <span id="selectedItems"></span>
+                <p>Total Amount:</p>
+                <span id="totalPrice"></span>
+            </fieldset>
+            <button type="submit">Submit Order</button>
+        </form>
+    </section>
+    <hr>
+
+    <section id="analytics">
+        <div class="feedback">
+            <h1>Customer Feedback</h1>
+            <form>
+                <label for="rating"><h3>Overall Rating:</h3></label>
+                <select id="rating" name="rating">
+                    <option value="5">5 Stars - Very Satisfied</option>
+                    <option value="4">4 Stars - Satisfied</option>
+                    <option value="3">3 Stars - Average</option>
+                    <option value="2">2 Stars - Dissatisfied</option>
+                    <option value="1">1 Star - Very Poor</option>
+                </select>
+                <br>
+                <textarea placeholder="Please leave your valuable suggestions to help us improve..." rows="4"
+                          cols="50"></textarea>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+</main>
+<script src="dataCus.js"></script>
+</body>
+</html>

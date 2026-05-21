@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food and beverage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="sidebar">
+        <h1 class="sidebar-title">Food and beverage</h1>
+        <nav class="menu">
+            <ul>
+                <li class="icon"><a href="#order-management">📖Order Management</a></li>
+                <li class="icon"><a href="#payment">💰Billing & Payment</a></li>
+                <li class="icon"><a href="#menu-admin">➕Menu Management</a></li>
+                <li class="icon"><a href="#analytics">Data & Feedback</a></li>
+            </ul>
+        </nav>
+    </div>
+
+</header>
+
+<hr>
+
+<main>
+
+    <section id="order-management">
+        <h2>Kitchen Order Management</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Table / Takeaway</th>
+                <th>Order Details</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="orderTable" onchange="getOrder()">
+
+            </tbody>
+        </table>
+    </section>
+
+    <hr>
+
+    <section id="payment">
+        <h2>Billing & Checkout</h2>
+        <div class="billing-info">
+            <p>Table Number:</p>
+            <select id="payNumber" onchange="calculatePrice()">
+                <option value="1">Table 1</option>
+                <option value="2">Table 2</option>
+                <option value="3">Table 3</option>
+                <option value="4">Table 4</option>
+                <option value="5">Table 5</option>
+                <option value="6">Table 6</option>
+                <option value="7">Table 7</option>
+                <option value="8">Table 8</option>
+            </select>
+            <p>Original Price:¥<span id="billPrice"></span></p>
+            <p>Discount: -¥<span id="dis"></span></p>
+            <p>Coupon: -¥<span id="cou"></span></p>
+            <h3>Amount Due: ¥<span id="finalCost"></span></h3>
+        </div>
+
+        <form>
+            <label>Select Payment Method:</label>
+            <select name="payment-method">
+                <option value="wechat">WeChat Pay</option>
+                <option value="alipay">Alipay</option>
+                <option value="credit-card">Credit Card</option>
+                <option value="cash">Cash</option>
+            </select>
+            <button type="submit">Confirm Payment & Print Invoice</button>
+        </form>
+    </section>
+
+    <hr>
+
+    <section id="menu-admin">
+        <h2>Backend Menu Management</h2>
+        <button>+ Add New Dish</button>
+        <ul>
+            <li>
+                <span>Braised Pork - ¥56</span>
+                <button>Edit</button>
+                <button>Remove</button>
+            </li>
+            <li>
+                <span>Signature Roast Duck - ¥128</span>
+                <button>Edit</button>
+                <button>Remove</button>
+            </li>
+            <li>
+                <span>Salad - ¥34</span>
+                <button>Edit</button>
+                <button>Remove</button>
+            </li>
+            <li>
+                <span>Tomato Egg Soup - ¥36</span>
+                <button>Edit</button>
+                <button>Remove</button>
+            </li>
+            <li>
+                <span>Set Meal A For Two - ¥198</span>
+                <button>Edit</button>
+                <button>Remove</button>
+            </li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <section id="analytics">
+        <h2>Data Statistics & Customer Reviews</h2>
+
+        <div class="dashboard">
+            <h3>Management Dashboard</h3>
+            <p>Today's Bestseller: Signature Roast Duck</p>
+            <p>Customer Taste Preference: 60% choose "Less Salt"</p>
+        </div>
+
+        <div class="feedback">
+            <h3>Customer Feedback</h3>
+            <p>-5 stars   The environment is cozy and the menu offers a great variety of food. </p>
+        </div>
+    </section>
+</main>
+<script src="data.js"></script>
+</body>
+</html>

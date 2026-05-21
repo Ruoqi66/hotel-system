@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>餐饮管理子系统</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>餐饮管理子系统</h1>
+    <nav>
+        <ul>
+            <li><a href="#ordering">自助点餐</a></li>
+            <li><a href="#order-management">订单管理</a></li>
+            <li><a href="#payment">收银与支付</a></li>
+            <li><a href="#menu-admin">菜单管理</a></li>
+            <li><a href="#analytics">数据与反馈</a></li>
+        </ul>
+    </nav>
+</header>
+
+<hr>
+
+<main>
+    <section id="ordering">
+        <h2>顾客自助点餐区</h2>
+
+        <div class="recommendations">
+            <h3>今日主厨推荐</h3>
+            <ul>
+                <li>招牌烤鸭 - <span>销量冠军</span>
+                    <div>
+                        <img src="duck.jpg" alt="烤鸭" width="15%">
+                    </div>
+                </li>
+                <li>时蔬沙拉 - <span>健康低脂</span>
+                    <div>
+                        <img src="salad.jpg" alt="沙拉" width="15%">
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <form action="/api/place-order" method="POST">
+            <fieldset>
+                <legend>选择菜品</legend>
+                <input type="checkbox" id="dish1" name="dish" value="红烧肉">
+                <label for="dish1">红烧肉 (单点)</label>
+                <select name="taste1">
+                    <option value="normal">正常</option>
+                    <option value="less-salt">少盐</option>
+                    <option value="spicy">加辣</option>
+                </select>
+                <br>
+
+                <input type="checkbox" id="dish2" name="dish" value="双人套餐A">
+                <label for="dish2">双人套餐A (套餐)</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>就餐方式</legend>
+                <input type="radio" id="dine-in" name="dining-type" value="dine-in" checked>
+                <label for="dine-in">堂食</label>
+                <input type="radio" id="takeaway" name="dining-type" value="takeaway">
+                <label for="takeaway">外卖配送</label>
+            </fieldset>
+
+            <button type="submit">提交订单</button>
+        </form>
+    </section>
+
+    <hr>
+
+    <section id="order-management">
+        <h2>后厨与服务员订单管理</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>订单号</th>
+                <th>桌号/外卖</th>
+                <th>菜品明细</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="orderTable" onchange="getOrder()" >
+
+            </tbody>
+        </table>
+    </section>
+
+    <hr>
+
+    <section id="payment">
+        <h2>收银与结账</h2>
+        <div class="billing-info">
+            <p>订单总额: ¥200.00</p>
+            <p>当前活动折扣 (系统自动计算): -¥20.00</p>
+            <p>优惠券抵扣: -¥10.00</p>
+            <h3>应付金额: ¥170.00</h3>
+        </div>
+
+        <form action="/api/checkout" method="POST">
+            <label>选择支付方式:</label>
+            <select name="payment-method">
+                <option value="wechat">微信支付</option>
+                <option value="alipay">支付宝</option>
+                <option value="credit-card">银行卡</option>
+                <option value="cash">现金</option>
+            </select>
+            <button type="submit">确认支付并打印发票</button>
+        </form>
+    </section>
+
+    <hr>
+
+    <section id="menu-admin">
+        <h2>后台菜单管理</h2>
+        <button>+ 新增菜品</button>
+        <ul>
+            <li>
+                <span>招牌烤鸭 (单点) - ¥128</span>
+                <button>编辑</button>
+                <button>下架</button>
+            </li>
+            <li>
+                <span>今日特价排骨 (特价菜) - ¥39</span>
+                <button>编辑</button>
+                <button>下架</button>
+            </li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <section id="analytics">
+        <h2>数据统计与顾客评价</h2>
+
+        <div class="dashboard">
+            <h3>管理层决策看板</h3>
+            <p>今日热销榜首: 招牌烤鸭</p>
+            <p>顾客口味偏好: 60%选择“少盐”</p>
+        </div>
+
+        <div class="feedback">
+            <h3>顾客意见反馈</h3>
+            <form action="/api/submit-feedback" method="POST">
+                <label for="rating">综合评分:</label>
+                <select id="rating" name="rating">
+                    <option value="5">5星 - 非常满意</option>
+                    <option value="4">4星 - 满意</option>
+                    <option value="3">3星 - 一般</option>
+                    <option value="2">2星 - 不满意</option>
+                    <option value="1">1星 - 极差</option>
+                </select>
+                <br>
+                <textarea placeholder="请留下您宝贵的建议，帮助我们改进..." rows="4" cols="50"></textarea>
+                <br>
+                <button type="submit">提交反馈</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>

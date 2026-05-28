@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>客房预订 - 客房管理子系统</title>
+    <link rel="stylesheet" href="../roomStyle/common.css">
+    <link rel="stylesheet" href="../roomStyle/booking.css">
+</head>
+<body>
+<div class="sidebar">
+    <h1 class="sidebar-title">客房管理</h1>
+    <nav class="menu">
+        <ul>
+            <li class="active"><a href=" ">客房预订</a></li>
+            <li><a href="room-status.html">客房状态</a></li>
+            <li><a href="check-in-out.html">入住退房</a></li>
+            <li><a href="room-service.html">客房服务</a></li>
+            <li><a href="fee-settle.html">费用结算</a></li>
+            <li><a href="customer-manage.html">客户管理</a></li>
+            <li><a href="data-analysis.html">数据报表</a></li>
+        </ul>
+    </nav>
+</div>
+<main>
+    <section id="booking">
+        <h2>客房预订</h2>
+        <div class="card">
+            <h3>新增线上预订</h3>
+            <div class="card">
+                <h3>预订表单</h3>
+                <div class="form-group"><label>客人姓名:</label><input type="text" id="guestName"
+                                                                       placeholder="请输入客人姓名"></div>
+                <div class="form-group"><label>联系电话:</label><input type="tel" id="guestPhone"
+                                                                       placeholder="请输入联系电话"></div>
+                <div class="form-group"><label>入住日期:</label><input type="date" id="checkInDate"></div>
+                <div class="form-group"><label>退房日期:</label><input type="date" id="checkOutDate"></div>
+                <div class="form-group">
+                    <label>客房类型:</label>
+                    <select id="roomType">
+                        <option value="标准间">标准间 (¥200/晚)</option>
+                        <option value="豪华间">豪华间 (¥350/晚)</option>
+                        <option value="套房">套房 (¥600/晚)</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>入住人数:</label><input type="number" id="guestCount" min="1" max="4"
+                                                                       value="1"></div>
+                <button class="btn-primary" onclick="bookRoom()">提交预订</button>
+            </div>
+        </div>
+        <div class="card">
+            <h3>预订记录管理</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>预订编号</th>
+                    <th>客户姓名</th>
+                    <th>房型</th>
+                    <th>入住时间</th>
+                    <th>退房时间</th>
+                    <th>预订状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="bookingTable"></tbody>
+            </table>
+        </div>
+    </section>
+</main>
+<script src="room.js"></script>
+</body>
+</html>

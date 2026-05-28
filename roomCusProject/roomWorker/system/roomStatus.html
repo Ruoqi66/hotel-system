@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>客房状态 - 客房管理子系统</title>
+    <link rel="stylesheet" href="../roomStyle/common.css">
+    <link rel="stylesheet" href="../roomStyle/room-status.css">
+</head>
+<body>
+<div class="sidebar">
+    <h1 class="sidebar-title">客房管理</h1>
+    <nav class="menu">
+        <ul>
+            <li><a href=" ">客房预订</a ></li>
+            <li class="active"><a href="room-status.html">客房状态</a ></li>
+            <li><a href="check-in-out.html">入住退房</a ></li>
+            <li><a href="room-service.html">客房服务</a ></li>
+            <li><a href="fee-settle.html">费用结算</a ></li>
+            <li><a href="customer-manage.html">客户管理</a ></li>
+            <li><a href="data-analysis.html">数据报表</a ></li>
+        </ul>
+    </nav>
+</div>
+<main>
+    <section id="room-status">
+        <h2>客房状态管理</h2>
+        <div class="card">
+            <h3>实时房态总览</h3>
+            <table>
+                <thead><tr><th>房间号</th><th>客房类型</th><th>售价(元/晚)</th><th>房间状态</th><th>操作</th></tr></thead>
+                <tbody>
+                <tr><td>101</td><td>标准双人间</td><td>268</td><td class="status-free">空房</td><td><button class="btn-primary">编辑</button></td></tr>
+                <tr><td>102</td><td>豪华大床房</td><td>368</td><td class="status-occupied">在住</td><td><button class="btn-primary">编辑</button></td></tr>
+                <tr><td>103</td><td>商务双床房</td><td>428</td><td class="status-booked">已预订</td><td><button class="btn-primary">编辑</button></td></tr>
+                <tr><td>201</td><td>行政套房</td><td>658</td><td>维修中</td><td><button class="btn-primary">编辑</button></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

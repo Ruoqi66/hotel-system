@@ -18,9 +18,6 @@
     border: none;
 }
 
-.hero h2::after {
-    display: none;
-}
 
 .hero p {
     font-size: 1.2rem;

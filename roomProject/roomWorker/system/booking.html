@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>客房预订 - 客房管理子系统</title>
-    <link rel="stylesheet" href="../roomStyle/common.css">
-    <link rel="stylesheet" href="../roomStyle/booking.css">
+    <link rel="stylesheet" href="../public/style.css">
 </head>
 <body>
 <div class="sidebar">
     <h1 class="sidebar-title">客房管理</h1>
     <nav class="menu">
         <ul>
-            <li class="active"><a href=" ">客房预订</a></li>
-            <li><a href="room-status.html">客房状态</a></li>
+            <li><a href="booking.html">客房预订</a></li>
+            <li><a href="roomStatus.html">客房状态</a></li>
             <li><a href="check-in-out.html">入住退房</a></li>
-            <li><a href="room-service.html">客房服务</a></li>
-            <li><a href="fee-settle.html">费用结算</a></li>
-            <li><a href="customer-manage.html">客户管理</a></li>
-            <li><a href="data-analysis.html">数据报表</a></li>
+            <li><a href="service.html">客房服务</a></li>
+            <li><a href="fee.html">费用结算</a></li>
+            <li><a href="inforManage.html">客户管理</a></li>
+            <li><a href="data.html">数据报表</a></li>
         </ul>
     </nav>
 </div>
@@ -37,10 +36,17 @@
                 <div class="form-group">
                     <label>客房类型:</label>
                     <select id="roomType">
-                        <option value="标准间">标准间 (¥200/晚)</option>
-                        <option value="豪华间">豪华间 (¥350/晚)</option>
-                        <option value="套房">套房 (¥600/晚)</option>
+                        <option value="Deluxe Twin Room">Deluxe Twin Room (¥1300/晚)</option>
+                        <option value="Deluxe King Room">Deluxe King Room (¥1,200/晚)</option>
+                        <option value="Ocean‑view Room">Ocean‑view Room (¥2,200/晚)</option>
+                        <option value="Pool Suite">Pool Suite (¥3,700/晚)</option>
+                        <option value="Presidential Suite">Presidential Suite (¥2,200/晚)</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label>是否选择早饭</label>
+                    <select value="1">是</select>
+                    <select value="0">否</select>
                 </div>
                 <div class="form-group"><label>入住人数:</label><input type="number" id="guestCount" min="1" max="4"
                                                                        value="1"></div>
@@ -66,6 +72,5 @@
         </div>
     </section>
 </main>
-<script src="room.js"></script>
 </body>
 </html>

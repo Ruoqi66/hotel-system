@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>费用结算管理 - 客房管理子系统</title>
+    <link rel="stylesheet" href="../public/style.css">
+</head>
+<body>
+<div class="sidebar">
+    <h1 class="sidebar-title">客房管理</h1>
+    <nav class="menu">
+        <ul>
+            <li><a href="booking.html">客房预订</a></li>
+            <li><a href="roomStatus.html">客房状态</a></li>
+            <li><a href="check-in-out.html">入住退房</a></li>
+            <li><a href="service.html">客房服务</a></li>
+            <li><a href="fee.html">费用结算</a></li>
+            <li><a href="inforManage.html">客户管理</a></li>
+            <li><a href="data.html">数据报表</a></li>
+        </ul>
+    </nav>
+</div>
+<main>
+    <section id="fee-settle">
+        <h2>费用结算管理</h2>
+        <div class="card">
+            <h3>账单结算</h3>
+            <div class="form-group"><label>在住房间号</label><input type="text" placeholder="输入房间号"></div>
+            <div class="form-group"><label>额外消费</label><input type="number" value="0" placeholder="零食/酒水/服务">
+            </div>
+            <div class="form-group">
+                <label>支付方式</label>
+                <select>
+                    <option>现金支付</option>
+                    <option>银行卡</option>
+                    <option>微信支付</option>
+                    <option>支付宝</option>
+                </select>
+            </div>
+            <button class="btn-primary">结算账单</button>
+        </div>
+        <div class="card">
+            <h3>结算记录</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>账单编号</th>
+                    <th>房间</th>
+                    <th>消费总额</th>
+                    <th>支付方式</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>FD2026042501</td>
+                    <td>302</td>
+                    <td>896元</td>
+                    <td>微信支付</td>
+                    <td>已结清</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

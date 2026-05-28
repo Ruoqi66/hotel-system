@@ -68,7 +68,6 @@ body {
 
 .menu li:hover, .menu li.active {
     background: #1f2d3d;
-    border-left: 4px solid #409eff;
 }
 
 .menu li.active a {

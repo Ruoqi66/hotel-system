@@ -8,11 +8,26 @@
 .stat-card {
     flex: 1;
     min-width: 200px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
+}
+
+.stat-card:nth-child(5n+1) {
+    background: #409eff;
+}
+
+.stat-card:nth-child(5n+2) {
+    background: #67c23a;
+}
+
+.stat-card:nth-child(5n+3) {
+    background: #e6a23c;
+}
+
+.stat-card:nth-child(5n+4) {
+    background: #f56c6c;
 }
 
 .stat-card h4 {

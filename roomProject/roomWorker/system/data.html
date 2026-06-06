@@ -1,70 +1,46 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>数据统计与分析 - 客房管理子系统</title>
+    <title>Data Statistics and Analysis</title>
     <link rel="stylesheet" href="../public/style.css">
     <link rel="stylesheet" href="../systemStyle/data.css">
 </head>
 <body>
-<div class="sidebar">
-    <h1 class="sidebar-title">客房管理</h1>
-    <nav class="menu">
-        <ul>
-            <li><a href="booking.html">客房预订</a></li>
-            <li><a href="roomStatus.html">客房状态</a></li>
-            <li><a href="check-in-out.html">入住退房</a></li>
-            <li><a href="service.html">客房服务</a></li>
-            <li><a href="fee.html">费用结算</a></li>
-            <li><a href="inforManage.html">客户管理</a></li>
-            <li><a href="data.html">数据报表</a></li>
-        </ul>
-    </nav>
-</div>
+<div id="sidebar-container"></div>
 <main>
     <section id="data-analysis">
-        <h2>数据统计与分析</h2>
+        <h2>Data Statistics and Analysis</h2>
         <div class="stats">
-            <div class="stat-card"><h4>总客房数量</h4>
+            <div class="stat-card"><h4>Total Rooms</h4>
                 <p>36</p></div>
-            <div class="stat-card"><h4>当前空房</h4>
+            <div class="stat-card"><h4>Current Vacant Rooms</h4>
                 <p>16</p></div>
-            <div class="stat-card"><h4>本月入住率</h4>
+            <div class="stat-card"><h4>Occupancy Rate This Month</h4>
                 <p>72%</p></div>
-            <div class="stat-card"><h4>月度总收入</h4>
+            <div class="stat-card"><h4>Monthly Total Revenue</h4>
                 <p>¥52860</p></div>
         </div>
         <div class="card">
-            <h3>业务报表</h3>
+            <h3>Business Report</h3>
             <table>
                 <thead>
                 <tr>
-                    <th>月份</th>
-                    <th>客房收入</th>
-                    <th>服务收入</th>
-                    <th>总营收</th>
-                    <th>入住率</th>
+                    <th>Month</th>
+                    <th>Room Revenue</th>
+                    <th>Service Revenue</th>
+                    <th>Total Revenue</th>
+                    <th>Occupancy Rate</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>2026-04</td>
-                    <td>46200</td>
-                    <td>6300</td>
-                    <td>52500</td>
-                    <td>68%</td>
-                </tr>
-                <tr>
-                    <td>2026-05</td>
-                    <td>48600</td>
-                    <td>4260</td>
-                    <td>52860</td>
-                    <td>72%</td>
-                </tr>
+                <tbody id="reportTable">
                 </tbody>
             </table>
         </div>
     </section>
 </main>
+<script src="../../shared/data.js"></script>
+<script src="../public/js.js"></script>
+<script src="../js/data.js"></script>
 </body>
 </html>

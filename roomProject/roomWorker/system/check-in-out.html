@@ -1,65 +1,45 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>入住退房办理 - 客房管理子系统</title>
+    <title>Check-in & Check-out</title>
     <link rel="stylesheet" href="../public/style.css">
 </head>
 <body>
-<div class="sidebar">
-    <h1 class="sidebar-title">客房管理</h1>
-    <nav class="menu">
-        <ul>
-            <li><a href="booking.html">客房预订</a></li>
-            <li><a href="roomStatus.html">客房状态</a></li>
-            <li><a href="check-in-out.html">入住退房</a></li>
-            <li><a href="service.html">客房服务</a></li>
-            <li><a href="fee.html">费用结算</a></li>
-            <li><a href="inforManage.html">客户管理</a></li>
-            <li><a href="data.html">数据报表</a></li>
-        </ul>
-    </nav>
-</div>
+<div id="sidebar-container"></div>
 <main>
     <section id="check-in-out">
-        <h2>入住退房办理</h2>
+        <h2>Check-in & Check-out</h2>
         <div class="card">
-            <h3>客人入住办理</h3>
-            <div class="form-group"><label>选择预订订单</label><select>
-                <option value="">--请选择待入住订单--</option>
+            <h3>Guest Check-in</h3>
+            <div class="form-group"><label>Select Booking Order</label><select>
+                <option value="">--Please select pending check-in order--</option>
             </select></div>
-            <div class="form-group"><label>身份证号码</label><input type="text" placeholder="身份验证"></div>
-            <div class="form-group"><label>押金金额</label><input type="number" value="300"></div>
-            <button class="btn-success">确认入住</button>
+            <div class="form-group"><label>ID Number</label><input type="text" placeholder="Identity Verification"></div>
+            <div class="form-group"><label>Deposit Amount</label><input type="number" value="300"></div>
+            <button class="btn-success">Confirm Check-in</button>
         </div>
         <div class="card">
-            <h3>当前在住客人</h3>
+            <h3>Current Guests</h3>
             <table>
                 <thead>
                 <tr>
-                    <th>房间号</th>
-                    <th>客人姓名</th>
-                    <th>入住日期</th>
-                    <th>预计退房时间</th>
-                    <th>押金</th>
-                    <th>操作</th>
+                    <th>Room No.</th>
+                    <th>Guest Name</th>
+                    <th>Check-in Date</th>
+                    <th>Expected Check-out Time</th>
+                    <th>Deposit</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>102</td>
-                    <td>张女士</td>
-                    <td>2026-05-23</td>
-                    <td>2026-05-27</td>
-                    <td>300元</td>
-                    <td>
-                        <button class="btn-danger">办理退房</button>
-                    </td>
-                </tr>
+                <tbody id="currentGuestsTable">
                 </tbody>
             </table>
         </div>
     </section>
 </main>
+<script src="../../shared/data.js"></script>
+<script src="../public/js.js"></script>
+<script src="../js/check-in-out.js"></script>
 </body>
 </html>

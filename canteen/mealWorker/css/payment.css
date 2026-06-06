@@ -1,0 +1,44 @@
+/* 专属样式：美化结账金额看板 */
+.billing-card {
+    background: #fdfefe;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.price-details p {
+    margin: 12px 0;
+    font-size: 16px;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-details .minus {
+    color: #e74c3c;
+}
+
+.price-details hr {
+    border: none;
+    border-top: 1px dashed #cbd5e1;
+    margin: 15px 0;
+}
+
+.price-details h3 {
+    display: flex;
+    justify-content: space-between;
+    color: #2c3e50;
+}
+
+.price-details .total {
+    color: #e67e22;
+    font-size: 24px;
+}
+
+.btn-submit {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    font-size: 16px;
+}

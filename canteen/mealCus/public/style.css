@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: #f2f4fb;
+    color: #2d3748;
+    line-height: 1.7;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    padding-right: 20px;
+    background: #fbfbfb;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    background: #ffcc00;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+    color: black;
+    font-size: 25px;
+    font-family: "Century Schoolbook", cursive;
+    font-weight: bold;
+}
+
+header h1 {
+    font-size: 20px;
+    font-family: "Century Schoolbook", cursive;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+nav a:hover,
+nav a.active-nav {
+    color: #c5a880;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #718096;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    padding: 8px 0;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #c5a880;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after, nav a.active-nav::after {
+    width: 100%;
+}
+
+section {
+    width: 1170px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 40px;
+    margin: 40px auto;
+    margin-bottom: 100px;
+    box-shadow: 0 10px 30px rgba(168, 180, 208, 0.1);
+    border: 1px solid rgba(234, 240, 246, 0.6);
+}
+
+section h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    color: #1a365d;
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+section h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background: #c5a880;
+    margin: 12px auto 0;
+}
+
+button, .btn-primary {
+    background-color: #1a365d;
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+button:hover, .btn-primary:hover {
+    background-color: #2a4365;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(26, 54, 93, 0.15);
+}
+
+input, select, textarea {
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    color: #2d3748;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #1a365d;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.05);
+}
+
+footer {
+    padding: 70px 20px;
+    border-top: 1px solid #eee;
+    font-size: 14px;
+    color: #666;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 380px;
+}
+
+.footer-left {
+    margin: 8px 0;
+}
+
+.footer-right {
+    display: flex;
+    gap: 80px;
+    text-align: center;
+}
+
+.qr img {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 8px;
+}
+
+.copyright {
+    margin-top: 40px;
+    font-size: 12px;
+    color: #999;
+}
+
+.footer p,
+.footer h1,
+.footer h2,
+.footer h3,
+.copyright {
+  margin: 0;
+}
+

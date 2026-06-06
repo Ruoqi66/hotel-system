@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Management - Food and beverage</title>
+    <<link rel="stylesheet" href="../public/style.css">
+    <link rel="stylesheet" href="../css/menu-admin.css">
+</head>
+<body>
+<main>
+    <section id="menu-admin">
+        <h2>Backend Menu Management</h2>
+        <div style="margin-bottom: 15px; text-align: right;">
+            <button class="btn-success" onclick="addDish()">+ Add New Dish</button>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>Dish Name</th>
+                <th>Price (yuan)</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="menuTable">
+                </tbody>
+        </table>
+    </section>
+</main>
+<script src="../js/menu.js"></script>
+</body>
+</html>

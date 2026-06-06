@@ -1,65 +1,49 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>客房服务与维护 - 客房管理子系统</title>
+    <title>Room Service & Maintenance</title>
     <link rel="stylesheet" href="../public/style.css">
 </head>
 <body>
-<div class="sidebar">
-    <h1 class="sidebar-title">客房管理</h1>
-    <nav class="menu">
-        <ul>
-            <li><a href="booking.html">客房预订</a></li>
-            <li><a href="roomStatus.html">客房状态</a></li>
-            <li><a href="check-in-out.html">入住退房</a></li>
-            <li><a href="service.html">客房服务</a></li>
-            <li><a href="fee.html">费用结算</a></li>
-            <li><a href="inforManage.html">客户管理</a></li>
-            <li><a href="data.html">数据报表</a></li>
-        </ul>
-    </nav>
-</div>
+<div id="sidebar-container"></div>
 <main>
     <section id="room-service">
-        <h2>客房服务与维护</h2>
+        <h2>Room Service & Maintenance</h2>
         <div class="card">
-            <h3>服务申请登记</h3>
-            <div class="form-group"><label>房间号</label><input type="text" placeholder="例如：102"></div>
+            <h3>Service Application Registration</h3>
+            <div class="form-group"><label>Room Number</label><input type="text" placeholder="e.g. 102"></div>
             <div class="form-group">
-                <label>服务类型</label>
+                <label>Service Type</label>
                 <select>
-                    <option>客房清洁打扫</option>
-                    <option>洗漱用品补充</option>
-                    <option>水电设备报修</option>
-                    <option>加急打扫/整理</option>
+                    <option>Room Cleaning</option>
+                    <option>Toiletries Replenishment</option>
+                    <option>Water & Electricity Equipment Repair</option>
+                    <option>Urgent Cleaning/Arrangement</option>
                 </select>
             </div>
-            <div class="form-group"><label>需求备注</label><input type="text" placeholder="填写详细要求"></div>
-            <button class="btn-primary">提交申请</button>
+            <div class="form-group"><label>Request Notes</label><input type="text" placeholder="Fill in detailed requirements"></div>
+            <button class="btn-primary">Submit Application</button>
         </div>
         <div class="card">
-            <h3>服务进度跟踪</h3>
+            <h3>Service Progress Tracking</h3>
             <table>
                 <thead>
                 <tr>
-                    <th>房间号</th>
-                    <th>服务类型</th>
-                    <th>提交时间</th>
-                    <th>处理状态</th>
+                    <th>Room Number</th>
+                    <th>Service Type</th>
+                    <th>Submission Time</th>
+                    <th>Processing Status</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>205</td>
-                    <td>客房清洁</td>
-                    <td>2026-04-25 09:20</td>
-                    <td>待处理</td>
-                </tr>
+                <tbody id="serviceTable">
                 </tbody>
             </table>
         </div>
     </section>
 </main>
+<script src="../../shared/data.js"></script>
+<script src="../public/js.js"></script>
+<script src="../js/service.js"></script>
 </body>
 </html>

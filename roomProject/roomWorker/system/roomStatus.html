@@ -1,91 +1,36 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>客房状态 - 客房管理子系统</title>
+    <title>Room Status</title>
     <link rel="stylesheet" href="../public/style.css">
     <link rel="stylesheet" href="../systemStyle/roomStatus.css">
 </head>
 <body>
-<div class="sidebar">
-    <h1 class="sidebar-title">客房管理</h1>
-    <nav class="menu">
-        <ul>
-            <li><a href="booking.html">客房预订</a></li>
-            <li><a href="roomStatus.html">客房状态</a></li>
-            <li><a href="check-in-out.html">入住退房</a></li>
-            <li><a href="service.html">客房服务</a></li>
-            <li><a href="fee.html">费用结算</a></li>
-            <li><a href="inforManage.html">客户管理</a></li>
-            <li><a href="data.html">数据报表</a></li>
-        </ul>
-    </nav>
-</div>
+<div id="sidebar-container"></div>
 <main>
     <section id="room-status">
-        <h2>客房状态管理</h2>
+        <h2>Room Status Management</h2>
         <div class="card">
-            <h3>实时房态总览</h3>
+            <h3>Real-time Room Status Overview</h3>
             <table>
                 <thead>
                 <tr>
-                    <th>房间号</th>
-                    <th>客房类型</th>
-                    <th>售价(元/晚)</th>
-                    <th>房间状态</th>
-                    <th>操作</th>
+                    <th>Room Number</th>
+                    <th>Room Type</th>
+                    <th>Price (RMB/night)</th>
+                    <th>Room Status</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>101</td>
-                    <td>Deluxe Twin Room</td>
-                    <td>1,300</td>
-                    <td class="status-free">空房</td>
-                    <td>
-                        <button class="btn-primary">编辑</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>102</td>
-                    <td>Deluxe King Room</td>
-                    <td>1,200</td>
-                    <td class="status-occupied">在住</td>
-                    <td>
-                        <button class="btn-primary">编辑</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>103</td>
-                    <td>Ocean‑view Room</td>
-                    <td>2,200</td>
-                    <td class="status-booked">已预订</td>
-                    <td>
-                        <button class="btn-primary">编辑</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>201</td>
-                    <td>Pool Suite</td>
-                    <td>3,700</td>
-                    <td>维修中</td>
-                    <td>
-                        <button class="btn-primary">编辑</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>201</td>
-                    <td>Presidential Suite</td>
-                    <td>18,888</td>
-                    <td>维修中</td>
-                    <td>
-                        <button class="btn-primary">编辑</button>
-                    </td>
-                </tr>
+                <tbody id="roomStatusTable">
                 </tbody>
             </table>
         </div>
     </section>
 </main>
+<script src="../../shared/data.js"></script>
+<script src="../public/js.js"></script>
+<script src="../js/roomStatus.js"></script>
 </body>
 </html>

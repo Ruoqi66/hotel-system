@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
-        window.location.href = 'Clientpage/html/roomCus/Choice.html';
+        window.location.href = "ClientPage/html/Choice.html";
     }, 10000);
 });

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-service Ordering - Hotel Dining</title>
+    <link rel="stylesheet" href="../public/style.css">
+    <link rel="stylesheet" href="../cusStyle/ordering.css">
+</head>
+<body>
+<div id="header-container"></div>
+
+<main>
+    <section id="ordering">
+        <h2>Self-service Ordering Area</h2>
+
+        <div class="recommendations">
+            <h3>Chef's Recommendation</h3>
+            <div class="rec-grid">
+                <div class="rec-card">
+                    <img src="../picture/main/duck.jpg" alt="Roast Duck">
+                    <div class="rec-info">
+                        <h3>Signature Roast Duck</h3>
+                        <span class="badge">Sales Champion</span>
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <img src="../picture/starters/salad.jpg" alt="Salad">
+                    <div class="rec-info">
+                        <h3>Healthy Low Fat Salad</h3>
+                        <span class="badge">Healthy Choice</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form onsubmit="return submitMeal()">
+            <h3 class="section-title">Select Dishes</h3>
+            <div class="menu-grid">
+                <h2>Starters</h2>
+                <div class="meal-order">
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish3" name="dish" value="Salad" onchange="orderMeal()">
+                            <label for="dish3" class="dish-name">Salad</label>
+                        </div>
+                        <img src="../picture/starters/salad.jpg" alt="Salad" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥34</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish6" name="dish" value="Crab Avocado Roll"
+                                   onchange="orderMeal()">
+                            <label for="dish6" class="dish-name">Crab Avocado Roll</label>
+                        </div>
+                        <img src="../picture/starters/roll.png" alt="roll" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥22</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish7" name="dish" value="Burrata Cheese Salad"
+                                   onchange="orderMeal()">
+                            <label for="dish7" class="dish-name">Burrata Cheese Salad</label>
+                        </div>
+                        <img src="../picture/starters/cheese%20salad.png" alt="Salad" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥36</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish8" name="dish" value="Basil Foie Gras"
+                                   onchange="orderMeal()">
+                            <label for="dish8" class="dish-name">Basil Foie Gras</label>
+                        </div>
+                        <img src="../picture/starters/foie%20gras.png" alt="Salad" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥52</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h2>Main Courses</h2>
+                <div class="meal-order">
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish1" name="dish" value="Braised Pork" onchange="orderMeal()">
+                            <label for="dish1" class="dish-name">Braised Pork</label>
+                        </div>
+                        <img src="../picture/main/red-cooked%20pork.png" alt="pork" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥56</span>
+                            <select name="taste1" class="taste-select">
+                                <option value="normal">Normal</option>
+                                <option value="less-salt">Less Salt</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish2" name="dish" value="Roast Duck" onchange="orderMeal()">
+                            <label for="dish2" class="dish-name">Roast Duck</label>
+                        </div>
+                        <img src="../picture/main/duck.jpg" alt="Roast Duck" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥128</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish9" name="dish" value="Spring Bamboo Shoots with White Shrimp"
+                                   onchange="orderMeal()">
+                            <label for="dish9" class="dish-name">Spring Bamboo Shoots with White Shrimp</label>
+                        </div>
+                        <img src="../picture/main/shrimp.png" alt="shrimp" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥68</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish10" name="dish" value="Black Truffle Steak"
+                                   onchange="orderMeal()">
+                            <label for="dish10" class="dish-name">Black Truffle Steak</label>
+                        </div>
+                        <img src="../picture/main/black%20truffle%20steak.png" alt="black truffle steak"
+                             class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥168</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish11" name="dish" value="Pan-Seared Scallops"
+                                   onchange="orderMeal()">
+                            <label for="dish11" class="dish-name">Pan-Seared Scallops</label>
+                        </div>
+                        <img src="../picture/main/scallop.png" alt="Pan-Seared Scallops" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥76</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish12" name="dish" value="Caviar Wagyu Toast"
+                                   onchange="orderMeal()">
+                            <label for="dish12" class="dish-name">Caviar Wagyu Toast</label>
+                        </div>
+                        <img src="../picture/main/caviar.png" alt="Caviar Wagyu Toast" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥93</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish13" name="dish" value="Pan-Seared Cod"
+                                   onchange="orderMeal()">
+                            <label for="dish13" class="dish-name">Pan-Seared Cod</label>
+                        </div>
+                        <img src="../picture/main/cod.png" alt="Pan-Seared Cod" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥68</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish19" name="dish" value="Boeuf bourguignon"
+                                   onchange="orderMeal()">
+                            <label for="dish19" class="dish-name">Boeuf bourguignon</label>
+                        </div>
+                        <img src="../picture/main/wine%20beef.png" alt="Boeuf bourguignon" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥98</span>
+                        </div>
+                    </div>
+
+                </div>
+                <h2>Soups</h2>
+                <div class="meal-order">
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish4" name="dish" value="French Cream of Mushroom Soup"
+                                   onchange="orderMeal()">
+                            <label for="dish4" class="dish-name">French Cream of Mushroom Soup</label>
+                        </div>
+                        <img src="../picture/Soups/cream.png" alt="French Cream of Mushroom Soup" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥36</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish14" name="dish" value="Cantonese Slow-Cooked Soup"
+                                   onchange="orderMeal()">
+                            <label for="dish14" class="dish-name">Cantonese Slow-Cooked Soup</label>
+                        </div>
+                        <img src="../picture/Soups/mushroom.png" alt="Cantonese Slow-Cooked Soup" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥66</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish15" name="dish" value="Peach Iced Soup"
+                                   onchange="orderMeal()">
+                            <label for="dish15" class="dish-name">Peach Iced Soup</label>
+                        </div>
+                        <img src="../picture/Soups/peach.png" alt="Peach Iced Soup" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥42</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Desserts</h2>
+                <div class="meal-order">
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish16" name="dish" value="Salmon Avocado Tart"
+                                   onchange="orderMeal()">
+                            <label for="dish16" class="dish-name">Salmon Avocado Tart</label>
+                        </div>
+                        <img src="../picture/Desserts/salmon.png" alt="Salmon Avocado Tart" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥68</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish17" name="dish" value="Fig Goat Cheese"
+                                   onchange="orderMeal()">
+                            <label for="dish17" class="dish-name">Fig Goat Cheese</label>
+                        </div>
+                        <img src="../picture/Desserts/fig.png" alt="Fig Goat Cheese" class="dish-img">
+                        <div class="dish-footer">
+                            <span class="price">¥56</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <h2>Combos</h2>
+                <div class="meal-order">
+                    <div class="dish-card combo-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish5" name="dish" value="Single Set Meal"
+                                   onchange="orderMeal()">
+                            <label for="dish5" class="dish-name">Single Set Meal</label>
+                        </div>
+                        <div class="combo-details">
+                            <ul>
+                                <li>Seasonal Vegetable Salad</li>
+                                <li>Spring Bamboo Shoots with White Shrimp</li>
+                                <li>Black Truffle Steak</li>
+                                <li>Peach Iced Soup</li>
+                            </ul>
+                        </div>
+                        <div class="dish-footer">
+                            <span class="price">¥268</span>
+                        </div>
+                    </div>
+                    <div class="dish-card combo-card">
+                        <div class="dish-header">
+                            <input type="checkbox" id="dish18" name="dish" value="Double Set Meal"
+                                   onchange="orderMeal()">
+                            <label for="dish18" class="dish-name">Double Set Meal</label>
+                        </div>
+                        <div class="combo-details">
+                            <ul>
+                                <li>Burrata Cheese Salad</li>
+                                <li>Spring Bamboo Shoots with White Shrimp</li>
+                                <li>Pan-Seared Scallops</li>
+                                <li>Caviar Wagyu Toast</li>
+                                <li>French Cream of Mushroom Soup*2</li>
+                                <li>Fig Goat Cheese</li>
+                            </ul>
+                        </div>
+                        <div class="dish-footer">
+                            <span class="price">¥362</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="section-title">Dining Method</h3>
+            <div class="dining-method">
+                <div class="radio-group">
+                    <input type="radio" id="dine-in" name="dining-type" value="dine-in" checked>
+                    <label for="dine-in">Dine-in</label>
+                    <select name="diningNumber" id="table">
+                        <option value="1">Table 1</option>
+                        <option value="2">Table 2</option>
+                        <option value="3">Table 3</option>
+                        <option value="4">Table 4</option>
+                        <option value="5">Table 5</option>
+                        <option value="6">Table 6</option>
+                        <option value="7">Table 7</option>
+                        <option value="8">Table 8</option>
+                    </select>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" id="takeaway" name="dining-type" value="takeaway">
+                    <label for="takeaway">Takeaway Delivery</label>
+                </div>
+            </div>
+            <div class="billing-panel">
+                <div class="billing-meta">
+                    <p>Selected: <span id="selectedItems">None</span></p>
+                    <div class="total-box">
+                        <span class="label">Total Amount: </span>
+                        <span id="totalPrice">0</span><span class="currency">Yuan</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">Submit Order</button>
+            </div>
+        </form>
+    </section>
+</main>
+<div id="footer-container"></div>
+<script src="../public/common.js"></script>
+<script src="../js/ordering.js"></script>
+</body>
+</html>

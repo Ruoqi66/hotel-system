@@ -1,0 +1,115 @@
+#evaluationTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: white;
+    table-layout: fixed;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+#evaluationTable th,
+#evaluationTable td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+#evaluationTable th {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    font-weight: 600;
+    color: #1a3a5c;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#evaluationTable tr:hover {
+    background: #f8fafc;
+}
+
+#evaluationTable tr:last-child td {
+    border-bottom: none;
+}
+
+.evaluation-score {
+    font-weight: 600;
+    color: #4facfe;
+}
+
+.evaluation-grade {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.evaluation-grade.excellent {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.evaluation-grade.good {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.evaluation-grade.average {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.evaluation-grade.poor {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.evaluation-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.evaluation-stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    text-align: center;
+}
+
+.evaluation-stat-card.excellent {
+    border-top: 4px solid #43e97b;
+}
+
+.evaluation-stat-card.good {
+    border-top: 4px solid #3b82f6;
+}
+
+.evaluation-stat-card.average {
+    border-top: 4px solid #f59e0b;
+}
+
+.evaluation-stat-card.poor {
+    border-top: 4px solid #ef4444;
+}
+
+.evaluation-stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a3a5c;
+    margin-bottom: 4px;
+}
+
+.evaluation-stat-label {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.evaluation-form {
+    max-width: 600px;
+    margin: 0 auto;
+}

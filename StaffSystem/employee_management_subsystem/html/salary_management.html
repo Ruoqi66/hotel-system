@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Salary Management</title>
+    <link rel="stylesheet" href="../public/common.css">
+    <link rel="stylesheet" href="../css/salary_management.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Salary Calculation</h2>
+            <div class="card">
+                <h3>Calculate Salary</h3>
+                <form class="salary-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="salaryEmployee">Employee:</label>
+                            <select id="salaryEmployee">
+                                <option value="">Select Employee</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="salaryMonth">Month:</label>
+                            <input type="month" id="salaryMonth">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="baseSalary">Base Salary:</label>
+                            <input type="number" id="baseSalary" placeholder="e.g. 5000" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="bonus">Bonus:</label>
+                            <input type="number" id="bonus" placeholder="e.g. 1000" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="allowance">Allowance:</label>
+                            <input type="number" id="allowance" placeholder="e.g. 500" min="0" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="overtimePay">Overtime Pay:</label>
+                            <input type="number" id="overtimePay" placeholder="Auto-calculated" min="0" value="0" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="deduction">Deduction:</label>
+                            <input type="number" id="deduction" placeholder="Auto-calculated" min="0" value="0" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="tax">Tax:</label>
+                            <input type="number" id="tax" placeholder="Auto-calculated" min="0" value="0" readonly>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn-primary" onclick="calculateSalary()">Calculate Salary</button>
+                        <button type="button" class="btn-secondary" onclick="saveSalary()">Save Salary Record</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card" id="salarySummary" style="display:none;">
+                <h3>Salary Summary</h3>
+                <div class="salary-summary">
+                    <div class="salary-stat-card">
+                        <div class="salary-stat-value" id="summaryBase">0</div>
+                        <div class="salary-stat-label">Base Salary</div>
+                    </div>
+                    <div class="salary-stat-card">
+                        <div class="salary-stat-value" id="summaryBonus">0</div>
+                        <div class="salary-stat-label">Bonus</div>
+                    </div>
+                    <div class="salary-stat-card">
+                        <div class="salary-stat-value" id="summaryAllowance">0</div>
+                        <div class="salary-stat-label">Allowance</div>
+                    </div>
+                    <div class="salary-stat-card">
+                        <div class="salary-stat-value" id="summaryOvertime">0</div>
+                        <div class="salary-stat-label">Overtime Pay</div>
+                    </div>
+                    <div class="salary-stat-card" style="border-left-color: #ef4444;">
+                        <div class="salary-stat-value" style="color: #ef4444;" id="summaryDeduction">0</div>
+                        <div class="salary-stat-label">Deduction</div>
+                    </div>
+                    <div class="salary-stat-card" style="border-left-color: #ef4444;">
+                        <div class="salary-stat-value" style="color: #ef4444;" id="summaryTax">0</div>
+                        <div class="salary-stat-label">Tax</div>
+                    </div>
+                    <div class="salary-stat-card" style="border-left-color: #10b981; grid-column: span 2;">
+                        <div class="salary-stat-value" style="color: #10b981; font-size: 42px;" id="summaryNet">0</div>
+                        <div class="salary-stat-label">Net Salary</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="../js/salary_management.js"></script>
+</body>
+</html>

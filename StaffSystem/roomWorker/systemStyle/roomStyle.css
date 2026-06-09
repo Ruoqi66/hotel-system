@@ -1,0 +1,85 @@
+.status-free {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.status-booked {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.status-occupied {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.room-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.room-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.room-card.free {
+    border-color: #43e97b;
+}
+
+.room-card.booked {
+    border-color: #f59e0b;
+}
+
+.room-card.occupied {
+    border-color: #ef4444;
+}
+
+.room-number {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a3a5c;
+    margin-bottom: 8px;
+}
+
+.room-type {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 12px;
+}
+
+.room-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #4facfe;
+}
+
+.room-status {
+    margin-top: 12px;
+}

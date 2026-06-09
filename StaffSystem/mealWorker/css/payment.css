@@ -1,0 +1,184 @@
+#payment {
+    width: 100%;
+}
+
+.billing-card {
+    background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    margin-bottom: 20px;
+}
+
+.billing-card .form-item {
+    margin-bottom: 24px;
+}
+
+.billing-card label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #334155;
+    font-size: 14px;
+}
+
+.billing-card select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: #334155;
+}
+
+.billing-card select:focus {
+    border-color: #4facfe;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.12);
+}
+
+.price-details {
+    background: #fafbfc;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 8px;
+}
+
+.price-details p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.price-details p:first-child {
+    padding-top: 0;
+}
+
+.price-details p span {
+    font-weight: 600;
+    color: #334155;
+    font-size: 14px;
+}
+
+.price-details .minus {
+    color: #ef4444;
+}
+
+.price-details hr {
+    border: none;
+    border-top: 2px dashed #e2e8f0;
+    margin: 14px 0;
+}
+
+.price-details h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding-top: 10px;
+    font-size: 16px;
+    color: #1a3a5c;
+}
+
+.price-details .total {
+    font-size: 22px;
+    font-weight: 700;
+    color: #4facfe;
+}
+
+.payment-form {
+    background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.payment-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #334155;
+    font-size: 14px;
+}
+
+.payment-form select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: #334155;
+    margin-bottom: 20px;
+}
+
+.payment-form select:focus {
+    border-color: #4facfe;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.12);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 16px rgba(79, 172, 254, 0.35);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(79, 172, 254, 0.45);
+}
+
+.btn-submit:active {
+    transform: translateY(-1px);
+}
+
+.payment-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    border-left: 4px solid #4facfe;
+    text-align: center;
+}
+
+.summary-item:last-child {
+    border-left-color: #43e97b;
+}
+
+.summary-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a3a5c;
+    margin-bottom: 4px;
+}
+
+.summary-label {
+    font-size: 13px;
+    color: #64748b;
+}

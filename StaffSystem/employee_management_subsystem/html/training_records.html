@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Training Records</title>
+    <link rel="stylesheet" href="../public/common.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Training Records Management</h2>
+            
+            <div class="nav-tabs">
+                <button onclick="navigateTo('training_plan_management.html')">← Back to Training Plans</button>
+                <button onclick="showSection('recordAttendance')" class="active">Record Attendance</button>
+                <button onclick="showSection('recordGrades')">Record Grades</button>
+                <button onclick="showSection('viewRecords')">View Records</button>
+                <button onclick="navigateTo('training_effectiveness_evaluation.html')">Training Evaluation</button>
+            </div>
+
+            <div class="grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalTrainings">0</div>
+                    <div class="stat-label">Total Trainings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalParticipants">0</div>
+                    <div class="stat-label">Total Participants</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgAttendance">0%</div>
+                    <div class="stat-label">Average Attendance Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgGrade">0</div>
+                    <div class="stat-label">Average Grade</div>
+                </div>
+            </div>
+
+            <div id="recordAttendance" class="section active">
+                <h3>Record Training Attendance</h3>
+                <form id="attendanceForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="selectTraining">Select Training Plan *</label>
+                            <select id="selectTraining" name="selectTraining" required onchange="loadEnrolledEmployees()">
+                                <option value="">Select Training</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="attendanceDate">Attendance Date *</label>
+                            <input type="date" id="attendanceDate" name="attendanceDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Employees Present:</label>
+                        <div id="employeeChecklist" class="card" style="max-height: 400px; overflow-y: auto;">
+                            <p style="color: #999; text-align: center;">Please select a training plan first</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="attendanceNotes">Attendance Notes</label>
+                        <textarea id="attendanceNotes" name="attendanceNotes" rows="3" placeholder="Any notes about attendance..."></textarea>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary">Save Attendance Record</button>
+                        <button type="reset" class="btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="recordGrades" class="section">
+                <h3>Record Training Grades</h3>
+                <form id="gradesForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="selectTrainingForGrades">Select Training Plan *</label>
+                            <select id="selectTrainingForGrades" name="selectTrainingForGrades" required onchange="loadEmployeesForGrades()">
+                                <option value="">Select Training</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="assessmentType">Assessment Type *</label>
+                            <select id="assessmentType" name="assessmentType" required>
+                                <option value="">Select Type</option>
+                                <option value="Written Exam">Written Exam</option>
+                                <option value="Practical Test">Practical Test</option>
+                                <option value="Project Evaluation">Project Evaluation</option>
+                                <option value="Oral Presentation">Oral Presentation</option>
+                                <option value="Overall Performance">Overall Performance</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Employee Grades:</label>
+                        <div id="gradesEntry" class="card" style="max-height: 500px; overflow-y: auto;">
+                            <p style="color: #999; text-align: center;">Please select a training plan first</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gradeComments">General Comments</label>
+                        <textarea id="gradeComments" name="gradeComments" rows="3" placeholder="Overall comments about the training assessment..."></textarea>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary">Save Grades</button>
+                        <button type="reset" class="btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="viewRecords" class="section">
+                <h3>View Training Records</h3>
+
+                <div class="form-row" style="margin-bottom: 16px;">
+                    <div class="form-group">
+                        <label for="searchEmployee">Search by employee name</label>
+                        <input type="text" id="searchEmployee" placeholder="Search by employee name..." onkeyup="filterRecords()">
+                    </div>
+                    <div class="form-group">
+                        <label for="filterTraining">Filter Training</label>
+                        <select id="filterTraining" onchange="filterRecords()">
+                            <option value="">All Trainings</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterAttendance">Attendance Status</label>
+                        <select id="filterAttendance" onchange="filterRecords()">
+                            <option value="">All Attendance Status</option>
+                            <option value="Present">Present</option>
+                            <option value="Absent">Absent</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterGrade">Grade Range</label>
+                        <select id="filterGrade" onchange="filterRecords()">
+                            <option value="">All Grades</option>
+                            <option value="90-100">Excellent (90-100)</option>
+                            <option value="80-89">Good (80-89)</option>
+                            <option value="70-79">Average (70-79)</option>
+                            <option value="0-69">Poor (0-69)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="btn-primary" onclick="exportRecords()">Export Records</button>
+
+                <table id="recordsTable">
+                    <thead>
+                        <tr>
+                            <th>Record ID</th>
+                            <th>Employee Name</th>
+                            <th>Training Plan</th>
+                            <th>Training Type</th>
+                            <th>Date</th>
+                            <th>Attendance</th>
+                            <th>Grade</th>
+                            <th>Grade Level</th>
+                            <th>Comments</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordsTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="../js/training_records.js"></script>
+</body>
+</html>

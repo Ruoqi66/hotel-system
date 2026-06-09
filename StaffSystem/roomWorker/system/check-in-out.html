@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check-in & Check-out</title>
+    <link rel="stylesheet" href="../public/style.css">
+</head>
+<body>
+<div id="sidebar-container"></div>
+<main>
+    <section id="check-in-out">
+        <h2>Check-in & Check-out</h2>
+        <div class="card">
+            <h3>Guest Check-in</h3>
+            <div class="form-group"><label>Select Booking Order</label><select>
+                <option value="">--Please select pending check-in order--</option>
+            </select></div>
+            <div class="form-group"><label>ID Number</label><input type="text" placeholder="Identity Verification"></div>
+            <div class="form-group"><label>Deposit Amount</label><input type="number" value="300"></div>
+            <button class="btn-success">Confirm Check-in</button>
+        </div>
+        <div class="card">
+            <h3>Current Guests</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Room No.</th>
+                    <th>Guest Name</th>
+                    <th>Check-in Date</th>
+                    <th>Expected Check-out Time</th>
+                    <th>Deposit</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody id="currentGuestsTable">
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+<script src="../../shared/data.js"></script>
+<script src="../public/js.js"></script>
+<script src="../js/check-in-out.js"></script>
+</body>
+</html>

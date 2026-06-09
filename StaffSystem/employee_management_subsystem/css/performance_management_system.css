@@ -1,0 +1,115 @@
+#performanceTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: white;
+    table-layout: fixed;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+#performanceTable th,
+#performanceTable td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+#performanceTable th {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    font-weight: 600;
+    color: #1a3a5c;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#performanceTable tr:hover {
+    background: #f8fafc;
+}
+
+#performanceTable tr:last-child td {
+    border-bottom: none;
+}
+
+.performance-score {
+    font-weight: 600;
+    color: #4facfe;
+}
+
+.performance-rating {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.performance-rating.outstanding {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.performance-rating.good {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.performance-rating.needs-improvement {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.performance-rating.poor {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.performance-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.performance-stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    text-align: center;
+}
+
+.performance-stat-card.outstanding {
+    border-left: 4px solid #43e97b;
+}
+
+.performance-stat-card.good {
+    border-left: 4px solid #3b82f6;
+}
+
+.performance-stat-card.needs-improvement {
+    border-left: 4px solid #f59e0b;
+}
+
+.performance-stat-card.poor {
+    border-left: 4px solid #ef4444;
+}
+
+.performance-stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a3a5c;
+    margin-bottom: 4px;
+}
+
+.performance-stat-label {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.performance-form {
+    max-width: 600px;
+    margin: 0 auto;
+}

@@ -1,0 +1,204 @@
+#schedulePreview {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    table-layout: fixed;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    border: 1px solid #f0f0f0;
+}
+
+#schedulePreview th,
+#schedulePreview td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+#schedulePreview th {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    font-weight: 600;
+    color: #1a3a5c;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+#schedulePreview th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 18px;
+    right: 18px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #e2e8f0 50%, transparent 100%);
+}
+
+#schedulePreview tr:hover {
+    background: #f8fafc;
+    transform: scale(1.002);
+}
+
+#schedulePreview tr:last-child td {
+    border-bottom: none;
+}
+
+.schedule-status {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.schedule-status.confirmed {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    color: #16a34a;
+}
+
+.schedule-status.pending {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #d97706;
+}
+
+.schedule-status.cancelled {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #dc2626;
+}
+
+.schedule-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.schedule-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.schedule-stat-card {
+    background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    border-left: 4px solid #4facfe;
+    transition: all 0.3s ease;
+}
+
+.schedule-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.schedule-stat-card:nth-child(2) {
+    border-left-color: #43e97b;
+}
+
+.schedule-stat-card:nth-child(3) {
+    border-left-color: #f59e0b;
+}
+
+.schedule-stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a3a5c;
+    margin-bottom: 6px;
+}
+
+.schedule-stat-label {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.schedule-type {
+    background: #fafbfc;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    border: 1px solid #f0f0f0;
+}
+
+.schedule-type h3 {
+    color: #1a3a5c;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.schedule-type h3::before {
+    content: '';
+    width: 3px;
+    height: 18px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 2px;
+}
+
+.schedule-type label {
+    margin-right: 10px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+}
+
+.schedule-type input[type="radio"] {
+    margin-right: 6px;
+    width: auto;
+}
+
+.day-schedule {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: #fafbfc;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+}
+
+.day-schedule:hover {
+    background: #f1f5f9;
+}
+
+.day-schedule label {
+    width: 80px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0;
+}
+
+.day-schedule input[type="time"] {
+    width: 120px;
+    padding: 10px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+}
+
+.day-schedule select {
+    width: 120px;
+    padding: 10px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+}
+
+.day-schedule span {
+    color: #94a3b8;
+    font-weight: 500;
+}

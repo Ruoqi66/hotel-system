@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data & Feedback - Food and beverage</title>
+    <link rel="stylesheet" href="../public/style.css">
+    <link rel="stylesheet" href="../css/analytics.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<main>
+    <section id="analytics">
+        <h2>Data Statistics & Customer Reviews</h2>
+
+        <div class="analytics-container">
+            <div class="stat-card">
+                <div class="stat-icon">🍽️</div>
+                <div class="stat-value" id="totalOrders">128</div>
+                <div class="stat-label">Today's Orders</div>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-value" id="avgRating">4.8</div>
+                <div class="stat-label">Average Rating</div>
+            </div>
+            <div class="stat-card orange">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value" id="revenue">$2,847</div>
+                <div class="stat-label">Today's Revenue</div>
+            </div>
+            <div class="stat-card red">
+                <div class="stat-icon">📈</div>
+                <div class="stat-value" id="feedbackCount">24</div>
+                <div class="stat-label">New Feedbacks</div>
+            </div>
+        </div>
+
+        <div class="data-grid">
+            <div class="chart-section">
+                <h3>Order Trend (Last 7 Days)</h3>
+                <div class="chart-container">
+                    <canvas id="orderTrendChart"></canvas>
+                </div>
+            </div>
+
+            <div class="top-items">
+                <h3>Top Selling Items</h3>
+                <ul class="top-item-list">
+                    <li>
+                        <span class="top-item-name">🍗 Signature Roast Duck</span>
+                        <span class="top-item-count">42</span>
+                    </li>
+                    <li>
+                        <span class="top-item-name">🥩 Wagyu Steak</span>
+                        <span class="top-item-count">38</span>
+                    </li>
+                    <li>
+                        <span class="top-item-name">🍤 Shrimp Tempura</span>
+                        <span class="top-item-count">31</span>
+                    </li>
+                    <li>
+                        <span class="top-item-name">🍣 Sushi Platter</span>
+                        <span class="top-item-count">28</span>
+                    </li>
+                    <li>
+                        <span class="top-item-name">🍝 Truffle Pasta</span>
+                        <span class="top-item-count">25</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card dashboard-card">
+            <h3>Management Dashboard</h3>
+            <div class="dashboard-content">
+                <div class="dashboard-item">
+                    <span class="dashboard-label">Today's Bestseller:</span>
+                    <span class="dashboard-value" id="bestseller">Loading...</span>
+                </div>
+                <div class="dashboard-item">
+                    <span class="dashboard-label">Customer Taste Preference:</span>
+                    <span class="dashboard-value" id="preference">Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card feedback-card">
+            <h3>Customer Feedback</h3>
+            <div class="feedback-content" id="feedbackList"></div>
+        </div>
+    </section>
+</main>
+<script src="../js/analytics.js"></script>
+</body>
+</html>

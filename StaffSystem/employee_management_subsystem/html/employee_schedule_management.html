@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Schedule Management</title>
+    <link rel="stylesheet" href="../public/common.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Schedule Management</h2>
+            
+            <div class="form-group">
+                <label>Schedule Type:</label>
+                <div style="display: flex; gap: 24px;">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="radio" name="scheduleType" value="fixed" checked> Fixed Schedule
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="radio" name="scheduleType" value="temporary"> Temporary Schedule
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="employeeSelect">Employee:</label>
+                <select id="employeeSelect">
+                    <option value="">Select Employee</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="scheduleDate">Schedule Date:</label>
+                <input type="week" id="scheduleDate">
+            </div>
+
+            <h3>Daily Schedule</h3>
+            
+            <div class="card">
+                <div class="form-row" style="gap: 12px;">
+                    <div style="flex: 0 0 100px;">Monday:</div>
+                    <input type="time" value="09:00" style="flex: 0 0 100px;">
+                    <span style="margin: auto 8px;">to</span>
+                    <input type="time" value="18:00" style="flex: 0 0 100px;">
+                    <select style="flex: 0 0 90px;">
+                        <option value="work">Work</option>
+                        <option value="dayoff">Day Off</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="form-row" style="gap: 12px;">
+                    <div style="flex: 0 0 100px;">Tuesday:</div>
+                    <input type="time" value="09:00" style="flex: 0 0 100px;">
+                    <span style="margin: auto 8px;">to</span>
+                    <input type="time" value="18:00" style="flex: 0 0 100px;">
+                    <select style="flex: 0 0 90px;">
+                        <option value="work">Work</option>
+                        <option value="dayoff">Day Off</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="form-row" style="gap: 12px;">
+                    <div style="flex: 0 0 100px;">Wednesday:</div>
+                    <input type="time" value="09:00" style="flex: 0 0 100px;">
+                    <span style="margin: auto 8px;">to</span>
+                    <input type="time" value="18:00" style="flex: 0 0 100px;">
+                    <select style="flex: 0 0 90px;">
+                        <option value="work">Work</option>
+                        <option value="dayoff">Day Off</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="form-row" style="gap: 12px;">
+                    <div style="flex: 0 0 100px;">Thursday:</div>
+                    <input type="time" value="09:00" style="flex: 0 0 100px;">
+                    <span style="margin: auto 8px;">to</span>
+                    <input type="time" value="18:00" style="flex: 0 0 100px;">
+                    <select style="flex: 0 0 90px;">
+                        <option value="work">Work</option>
+                        <option value="dayoff">Day Off</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="form-row" style="gap: 12px;">
+                    <div style="flex: 0 0 100px;">Friday:</div>
+                    <input type="time" value="09:00" style="flex: 0 0 100px;">
+                    <span style="margin: auto 8px;">to</span>
+                    <input type="time" value="18:00" style="flex: 0 0 100px;">
+                    <select style="flex: 0 0 90px;">
+                        <option value="work">Work</option>
+                        <option value="dayoff">Day Off</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="form-row" style="gap: 12px;">
+                    <div style="flex: 0 0 100px;">Saturday:</div>
+                    <input type="time" value="09:00" style="flex: 0 0 100px;">
+                    <span style="margin: auto 8px;">to</span>
+                    <input type="time" value="18:00" style="flex: 0 0 100px;">
+                    <select style="flex: 0 0 90px;">
+                        <option value="work">Work</option>
+                        <option value="dayoff" selected>Day Off</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="form-row" style="gap: 12px;">
+                    <div style="flex: 0 0 100px;">Sunday:</div>
+                    <input type="time" value="09:00" style="flex: 0 0 100px;">
+                    <span style="margin: auto 8px;">to</span>
+                    <input type="time" value="18:00" style="flex: 0 0 100px;">
+                    <select style="flex: 0 0 90px;">
+                        <option value="work">Work</option>
+                        <option value="dayoff" selected>Day Off</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="btn-group" style="margin-bottom: 24px;">
+                <button class="btn-primary" onclick="saveSchedule()">Save Schedule</button>
+                <button class="btn-secondary" onclick="loadExistingSchedule()">Load Existing Schedule</button>
+            </div>
+
+            <h3>Schedule Preview</h3>
+            <table id="schedulePreview">
+                <thead>
+                    <tr><th>Day</th><th>Start Time</th><th>End Time</th><th>Status</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+    <script>
+        const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            loadEmployees();
+            const today = new Date();
+            const weekStart = getWeekStart(today);
+            document.getElementById('scheduleDate').value = weekStart;
+            updatePreview();
+        });
+
+        function getWeekStart(date) {
+            const d = new Date(date);
+            const day = d.getDay();
+            const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+            const monday = new Date(d.setDate(diff));
+            return monday.toISOString().split('T')[0];
+        }
+
+        function loadEmployees() {
+            const employees = JSON.parse(localStorage.getItem('employees') || '[]');
+            const select = document.getElementById('employeeSelect');
+            employees.forEach(emp => {
+                const option = document.createElement('option');
+                option.value = emp.name;
+                option.textContent = emp.name + ' - ' + emp.department;
+                select.appendChild(option);
+            });
+        }
+
+        function saveSchedule() {
+            alert('Schedule saved successfully!');
+        }
+
+        function loadExistingSchedule() {
+            alert('Loading schedule...');
+        }
+
+        function updatePreview() {
+            const tbody = document.querySelector('#schedulePreview tbody');
+            tbody.innerHTML = '';
+            dayNames.forEach(day => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${day}</td><td>09:00</td><td>18:00</td><td>Work</td>`;
+                tbody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>

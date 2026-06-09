@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Performance Management System</title>
+    <link rel="stylesheet" href="../public/common.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Performance Management</h2>
+            
+            <div class="nav-tabs">
+                <button onclick="showSection('kpiSetup')" class="active">KPI Setup</button>
+                <button onclick="showSection('performanceReview')">Performance Review</button>
+                <button onclick="showSection('viewReviews')">Review Records</button>
+            </div>
+
+            <div id="kpiSetup" class="section active">
+                <h3>Set Performance Indicators (KPIs & OKRs)</h3>
+                <form id="kpiForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employeeSelect">Select Employee *</label>
+                            <select id="employeeSelect" required>
+                                <option value="">Select Employee</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewPeriod">Review Period *</label>
+                            <select id="reviewPeriod" required>
+                                <option value="">Select Period</option>
+                                <option value="Q1-2026">Q1 2026 (Jan-Mar)</option>
+                                <option value="Q2-2026">Q2 2026 (Apr-Jun)</option>
+                                <option value="Q3-2026">Q3 2026 (Jul-Sep)</option>
+                                <option value="Q4-2026">Q4 2026 (Oct-Dec)</option>
+                                <option value="Annual-2026">Annual 2026</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="kpi-section">
+                        <h4>Key Performance Indicators (KPIs)</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>KPI Name</th>
+                                    <th>Description</th>
+                                    <th>Target</th>
+                                    <th>Weight (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Customer Satisfaction Score</strong></td>
+                                    <td>Maintain guest satisfaction rating above target</td>
+                                    <td style="text-align: center;">90%</td>
+                                    <td style="text-align: center;">
+                                        <input type="number" id="kpi1_weight" min="0" max="100" value="25" style="width: 70px; text-align: center; padding: 6px;" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revenue Generation</strong></td>
+                                    <td>Achieve departmental revenue targets</td>
+                                    <td style="text-align: center;">100%</td>
+                                    <td style="text-align: center;">
+                                        <input type="number" id="kpi2_weight" min="0" max="100" value="25" style="width: 70px; text-align: center; padding: 6px;" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Service Quality</strong></td>
+                                    <td>Compliance with hotel service standards</td>
+                                    <td style="text-align: center;">95%</td>
+                                    <td style="text-align: center;">
+                                        <input type="number" id="kpi3_weight" min="0" max="100" value="20" style="width: 70px; text-align: center; padding: 6px;" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Team Collaboration</strong></td>
+                                    <td>Work effectively with team members</td>
+                                    <td style="text-align: center;">85%</td>
+                                    <td style="text-align: center;">
+                                        <input type="number" id="kpi4_weight" min="0" max="100" value="15" style="width: 70px; text-align: center; padding: 6px;" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Professional Development</strong></td>
+                                    <td>Complete training and skill improvement</td>
+                                    <td style="text-align: center;">80%</td>
+                                    <td style="text-align: center;">
+                                        <input type="number" id="kpi5_weight" min="0" max="100" value="15" style="width: 70px; text-align: center; padding: 6px;" required>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="kpi-section">
+                        <h4>Objectives and Key Results (OKRs)</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Objective 1</strong></td>
+                                    <td><input type="text" id="objective1" placeholder="e.g., Improve guest experience in front desk operations" style="width: 100%; padding: 8px;"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Key Result 1.1</strong></td>
+                                    <td><input type="text" id="kr1_1" placeholder="e.g., Reduce check-in time to under 3 minutes" style="width: 100%; padding: 8px;"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Key Result 1.2</strong></td>
+                                    <td><input type="text" id="kr1_2" placeholder="e.g., Achieve 95% positive feedback on check-in process" style="width: 100%; padding: 8px;"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Objective 2</strong></td>
+                                    <td><input type="text" id="objective2" placeholder="e.g., Enhance room service efficiency" style="width: 100%; padding: 8px;"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Key Result 2.1</strong></td>
+                                    <td><input type="text" id="kr2_1" placeholder="e.g., Deliver room service within 20 minutes" style="width: 100%; padding: 8px;"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Key Result 2.2</strong></td>
+                                    <td><input type="text" id="kr2_2" placeholder="e.g., Maintain 90% accuracy in order fulfillment" style="width: 100%; padding: 8px;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary">Save Performance Indicators</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="performanceReview" class="section">
+                <h3>Conduct Performance Review</h3>
+                <form id="reviewForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reviewEmployee">Select Employee *</label>
+                            <select id="reviewEmployee" required>
+                                <option value="">Select Employee</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewPeriodSelect">Review Period *</label>
+                            <select id="reviewPeriodSelect" required>
+                                <option value="">Select Period</option>
+                                <option value="Q1-2026">Q1 2026</option>
+                                <option value="Q2-2026">Q2 2026</option>
+                                <option value="Q3-2026">Q3 2026</option>
+                                <option value="Q4-2026">Q4 2026</option>
+                                <option value="Annual-2026">Annual 2026</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="evaluationType">Evaluation Type *</label>
+                            <select id="evaluationType" required>
+                                <option value="">Select Type</option>
+                                <option value="Self">Self Evaluation</option>
+                                <option value="Peer">Peer Evaluation</option>
+                                <option value="Manager">Manager Evaluation</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reviewerName">Reviewer Name *</label>
+                            <input type="text" id="reviewerName" required placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewerRole">Your Role *</label>
+                            <input type="text" id="reviewerRole" required placeholder="e.g., Department Manager">
+                        </div>
+                    </div>
+
+                    <div class="kpi-section">
+                        <h4>KPI Performance Rating</h4>
+                        <div class="kpi-item">
+                            <div class="kpi-header">Customer Satisfaction Score</div>
+                            <div class="rating-group">
+                                <div class="rating-stars" data-rating="kpi1_rating">
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
+                                </div>
+                                <input type="hidden" id="kpi1_rating" required>
+                            </div>
+                        </div>
+                        <div class="kpi-item">
+                            <div class="kpi-header">Revenue Generation</div>
+                            <div class="rating-group">
+                                <div class="rating-stars" data-rating="kpi2_rating">
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
+                                </div>
+                                <input type="hidden" id="kpi2_rating" required>
+                            </div>
+                        </div>
+                        <div class="kpi-item">
+                            <div class="kpi-header">Service Quality</div>
+                            <div class="rating-group">
+                                <div class="rating-stars" data-rating="kpi3_rating">
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
+                                </div>
+                                <input type="hidden" id="kpi3_rating" required>
+                            </div>
+                        </div>
+                        <div class="kpi-item">
+                            <div class="kpi-header">Team Collaboration</div>
+                            <div class="rating-group">
+                                <div class="rating-stars" data-rating="kpi4_rating">
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
+                                </div>
+                                <input type="hidden" id="kpi4_rating" required>
+                            </div>
+                        </div>
+                        <div class="kpi-item">
+                            <div class="kpi-header">Professional Development</div>
+                            <div class="rating-group">
+                                <div class="rating-stars" data-rating="kpi5_rating">
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
+                                </div>
+                                <input type="hidden" id="kpi5_rating" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-section">
+                        <h4>OKR Achievement</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Objective 1 Achievement (%)</label>
+                                <input type="number" id="obj1_achievement" min="0" max="100" placeholder="0-100">
+                            </div>
+                            <div class="form-group">
+                                <label>Objective 2 Achievement (%)</label>
+                                <input type="number" id="obj2_achievement" min="0" max="100" placeholder="0-100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="strengths">Strengths & Achievements</label>
+                        <textarea id="strengths" rows="4" placeholder="Describe employee's key strengths and notable achievements..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="areasForImprovement">Areas for Improvement</label>
+                        <textarea id="areasForImprovement" rows="4" placeholder="Identify areas where employee can improve..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="developmentPlan">Development Plan</label>
+                        <textarea id="developmentPlan" rows="4" placeholder="Suggest specific actions for professional growth..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="overallComments">Overall Comments</label>
+                        <textarea id="overallComments" rows="4" placeholder="Additional feedback and comments..."></textarea>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary">Submit Performance Review</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="viewReviews" class="section">
+                <h3>Performance Review Records</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="filterEmployee">Filter by Employee</label>
+                        <select id="filterEmployee">
+                            <option value="">All Employees</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterPeriod">Filter by Period</label>
+                        <select id="filterPeriod">
+                            <option value="">All Periods</option>
+                            <option value="Q1-2026">Q1 2026</option>
+                            <option value="Q2-2026">Q2 2026</option>
+                            <option value="Q3-2026">Q3 2026</option>
+                            <option value="Q4-2026">Q4 2026</option>
+                            <option value="Annual-2026">Annual 2026</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterType">Filter by Type</label>
+                        <select id="filterType">
+                            <option value="">All Types</option>
+                            <option value="Self">Self Evaluation</option>
+                            <option value="Peer">Peer Evaluation</option>
+                            <option value="Manager">Manager Evaluation</option>
+                        </select>
+                    </div>
+                </div>
+                <table id="reviewsTable">
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Period</th>
+                            <th>Type</th>
+                            <th>Reviewer</th>
+                            <th>Overall Score</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reviewsList">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="../js/performance_management_system.js"></script>
+</body>
+</html>

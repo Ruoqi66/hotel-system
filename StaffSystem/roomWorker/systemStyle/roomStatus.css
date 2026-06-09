@@ -1,0 +1,99 @@
+.room-status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.room-status-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.room-status-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.room-status-card.free {
+    border-top: 4px solid #43e97b;
+}
+
+.room-status-card.occupied {
+    border-top: 4px solid #ef4444;
+}
+
+.room-status-card.maintenance {
+    border-top: 4px solid #f59e0b;
+}
+
+.room-status-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a3a5c;
+    margin-bottom: 4px;
+}
+
+.room-status-label {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.room-status-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: white;
+    table-layout: fixed;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.room-status-table th,
+.room-status-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.room-status-table th {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    font-weight: 600;
+    color: #1a3a5c;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.room-status-table tr:hover {
+    background: #f8fafc;
+}
+
+.room-status-table tr:last-child td {
+    border-bottom: none;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.status-indicator.free {
+    background: #43e97b;
+}
+
+.status-indicator.occupied {
+    background: #ef4444;
+}
+
+.status-indicator.maintenance {
+    background: #f59e0b;
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Yzluxe Hotel Staff System</title>
+    <link rel="stylesheet" href="../css/afterLogin.css">
+</head>
+<body>
+<!-- 顶部品牌 Header -->
+<header class="brand-header">
+    <div class="brand-left">
+        <img src="../../photo/logo.png" alt="Hotel Logo" class="brand-logo">
+        <span class="brand-name">Yzluxe Hotel</span>
+    </div>
+    <div class="brand-right">
+        <span class="system-title">Staff Management System</span>
+        <span class="current-time" id="currentTime"></span>
+    </div>
+</header>
+<div class="main-container">
+<div class="sidebar">
+    <div class="sidebar-title">🏨 Hotel Management System</div>
+    <ul class="menu" id="menu">
+        <li class="level1">
+            <a href="Dashboard.html">
+                <i class="icon">📊</i> Dashboard
+            </a>
+        </li>
+        <li class="level1 has-submenu">
+            <a href="javascript:void(0)" onclick="toggleSubmenu(this)"><i class="icon">🍽️</i> Food and beverage</a>
+            <ul class="level2">
+                <li><a href="../mealWorker/sys/order.html"> Order</a></li>
+                <li><a href="../mealWorker/sys/payment.html">Payment</a></li>
+                <li><a href="../mealWorker/sys/menu-admin.html">Menu-admin</a></li>
+                <li><a href="../mealWorker/sys/analytics.html">Analytics</a></li>
+            </ul>
+        </li>
+        <li class="level1">
+            <a href="entertainment.html">
+                <i class="icon">🎤</i> Entertainment
+            </a>
+        </li>
+        <li class="level1 has-submenu">
+            <a href="javascript:void(0)" onclick="toggleSubmenu(this)"><i class="icon">🛏️</i> Room Service</a>
+            <ul class="level2">
+                <li><a href="../roomWorker/system/booking.html"> Booking</a></li>
+                <li><a href="../roomWorker/system/check-in-out.html"> Check-in-out</a></li>
+                <li><a href="../roomWorker/system/data.html">Data</a></li>
+                <li><a href="../roomWorker/system/inforManage.html">Infor-Manage</a></li>
+                <li><a href="../roomWorker/system/roomStatus.html">RoomStatus</a></li>
+                <li><a href="../roomWorker/system/fee.html">Fee</a></li>
+                <li><a href="../roomWorker/system/service.html">Service</a></li>
+            </ul>
+        </li>
+        <li class="level1">
+            <a href="entertainment.html">
+                <i class="icon">💰</i> Financial administration
+            </a>
+        </li>
+
+        <li class="level1 has-submenu">
+            <a href="../employee_management_subsystem/html/employee_list.html" onclick="toggleSubmenu(this); return false;"><i class="icon">👤</i>  Staff management</a>
+            <ul class="level2">
+                <li><a href="../employee_management_subsystem/html/employee_list.html">Employee List Display</a></li>
+                <li><a href="../employee_management_subsystem/html/add_employee.html">Add Employee</a></li>
+                <li class="leverl2 has-submenu">
+                    <a href="../employee_management_subsystem/html/employee_schedule_management.html" onclick="toggleSubmenu(this); return false;">Schedule & Attendance</a>
+                    <ul class="level3">
+                        <li><a href="../employee_management_subsystem/html/employee_schedule_management.html">Schedule Management</a></li>
+                        <li><a href="../employee_management_subsystem/html/attendance_check.html">Attendance Check</a></li>
+                        <li><a href="../employee_management_subsystem/html/attendance_statistics.html">Attendance Statistics</a></li>
+                    </ul>
+                </li>
+                <li class="leverl2 has-submenu">
+                    <a href="../employee_management_subsystem/html/salary_management.html" onclick="toggleSubmenu(this); return false;">Salary Management</a>
+                    <ul class="level3">
+                        <li><a href="../employee_management_subsystem/html/salary_management.html">Salary Calculation</a></li>
+                        <li><a href="../employee_management_subsystem/html/salary_payment.html">Salary Payment</a></li>
+                        <li><a href="../employee_management_subsystem/html/salary_statistics.html">Salary Statistics</a></li>
+                    </ul>
+                </li>
+                <li class="leverl2 has-submenu">
+                    <a href="../employee_management_subsystem/html/training_plan_management.html" onclick="toggleSubmenu(this); return false;">Training Management</a>
+                    <ul class="level3">
+                        <li><a href="../employee_management_subsystem/html/training_plan_management.html">Create Training Plan</a></li>
+                        <li><a href="../employee_management_subsystem/html/view_training_plans.html">View Training Plans</a></li>
+                        <li><a href="../employee_management_subsystem/html/training_records.html">Training Records</a></li>
+                        <li><a href="../employee_management_subsystem/html/training_effectiveness_evaluation.html">Effectiveness Evaluation</a></li>
+                    </ul>
+                </li>
+                <li class="leverl2 has-submenu">
+                    <a href="../employee_management_subsystem/html/performance_management_system.html?section=kpiSetup" onclick="toggleSubmenu(this); return false;">Performance Evaluation</a>
+                    <ul class="level3">
+                        <li><a href="../employee_management_subsystem/html/performance_management_system.html?section=kpiSetup">KPI Setup</a></li>
+                        <li><a href="../employee_management_subsystem/html/performance_management_system.html?section=performanceReview">Performance Review</a></li>
+                        <li><a href="../employee_management_subsystem/html/performance_management_system.html?section=viewReviews">Review Records</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="entertainment.html">
+                <i class="icon">📦</i> Storeroom management
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="main">
+    <div class="header">
+        <button id="back" class="button" onclick="window.open('login.html')">Back</button>
+        <div class="user">
+            <span class="user-avatar">👤</span>
+            <span id="showName"></span>
+        </div>
+    </div>
+    <div class="iframe">
+        <iframe id="data" src="Dashboard.html"></iframe>
+    </div>
+</div>
+</div>
+
+<script src="../js/afterLogin.js"></script>
+</body>
+</html>

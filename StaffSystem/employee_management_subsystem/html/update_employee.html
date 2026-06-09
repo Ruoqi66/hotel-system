@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Employee</title>
+    <link rel="stylesheet" href="../public/common.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Update Employee Information</h2>
+            <form id="updateForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div style="display: flex; gap: 24px;">
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="radio" id="male" name="gender" value="male">
+                                male
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="radio" id="female" name="gender" value="female">
+                                female
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="18" max="65" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contact">Contact Information</label>
+                        <input type="tel" id="contact" name="contact" minlength="8" maxlength="15" pattern="\d+" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Hire Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" name="department" required>
+                            <optgroup label="Guest Service Department">
+                                <option value="Housekeeping Department">Housekeeping Department</option>
+                                <option value="Restaurant and Bar Department">Restaurant and Bar Department</option>
+                                <option value="Entertainment Department">Entertainment Department</option>
+                                <option value="Sales Department">Sales Department</option>
+                                <option value="Marketing Department">Marketing Department</option>
+                            </optgroup>
+                            <optgroup label="Back office Department">
+                                <option value="Finance Department">Finance Department</option>
+                                <option value="Human resource Department">Human resource Department</option>
+                                <option value="Engineering Department">Engineering Department</option>
+                                <option value="Security Department">Security Department</option>
+                                <option value="Purchasing Department">Purchasing Department</option>
+                                <option value="Executive Department">Executive Department</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Position</label>
+                        <select id="position" name="position" required>
+                            <option value="Manager">Manager</option>
+                            <option value="Deputy Manager">Deputy Manager</option>
+                            <option value="Supervisor">Supervisor</option>
+                            <option value="Staff">Staff</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="personalInformationDocument">Personal Information Document</label>
+                        <input type="file" id="personalInformationDocument" name="personalInformationDocument">
+                    </div>
+                    <div class="form-group">
+                        <label for="employeePhoto">Employee Photo</label>
+                        <input type="file" id="employeePhoto" name="employeePhoto">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn-primary">Update Employee</button>
+                    <button type="button" class="btn-secondary" onclick="window.history.back()">Cancel</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="../js/update_employee.js"></script>
+</body>
+</html>

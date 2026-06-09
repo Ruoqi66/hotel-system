@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management Subsystem</title>
+    <link rel="stylesheet" href="../public/common.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Employee List</h2>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search employee name..." onkeyup="handleKeyPress(event)">
+                <button class="btn-primary" onclick="searchEmployee()">Search</button>
+                <button class="btn-secondary" onclick="showAllEmployees()" id="backToListBtn" style="display:none;">Back to List</button>
+            </div>
+            <div id="searchResult"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Contact Information</th>
+                        <th>Hire Date</th>
+                        <th>Department</th>
+                        <th>Position</th>
+                        <th>Personal Information Document</th>
+                        <th>Personal Photo</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeTableBody"></tbody>
+            </table>
+        </section>
+    </main>
+ <script src="../js/employee_list.js"></script>
+</body>
+</html>

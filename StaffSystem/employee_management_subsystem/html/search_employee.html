@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Employee</title>
+    <link rel="stylesheet" href="../public/common.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Search Employee</h2>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Please enter employee name." onkeyup="handleKeyPress(event)">
+                <button class="btn-primary" onclick="searchEmployee()">Search</button>
+            </div>
+            <div id="searchResult"></div>
+        </section>
+    </main>
+    <script src="../js/search_employee.js"></script>
+</body>
+</html>

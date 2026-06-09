@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Salary Payment</title>
+    <link rel="stylesheet" href="../public/common.css">
+    <link rel="stylesheet" href="../css/salary_payment.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Salary Payment</h2>
+
+            <div class="card">
+                <h3>Batch Payment Processing</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="paymentMonth">Month:</label>
+                        <select id="paymentMonth">
+                            <option value="">Select Month</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMethod">Payment Method:</label>
+                        <select id="paymentMethod">
+                            <option value="bank_transfer">Bank Transfer</option>
+                            <option value="cash">Cash Payment</option>
+                            <option value="check">Check</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="payDate">Payment Date:</label>
+                        <input type="date" id="payDate">
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="processBatchPayment()">Process Batch Payment</button>
+            </div>
+
+            <h3>Pending Payments</h3>
+            <table id="pendingPayments">
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Month</th>
+                        <th>Net Salary</th>
+                        <th>Payment Method</th>
+                        <th>Pay Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <h3>Payment History</h3>
+            <table id="paymentHistory">
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Month</th>
+                        <th>Net Salary</th>
+                        <th>Payment Method</th>
+                        <th>Pay Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+    <script src="../js/salary_payment.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>酒店管理系统 - 仪表盘</title>
+    <link rel="stylesheet" href="../css/Dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="title">
+        <h1>Data Overview</h1>
+    </div>
+    <div class="date" id="realTime"></div>
+</div>
+
+<div class="card-group">
+    <div class="card card-blue">
+        <div class="icon">🏠</div>
+        <div class="info">
+            <div class="num">100</div>
+            <div class="label">Total Room</div>
+        </div>
+    </div>
+    <div class="card card-green">
+        <div class="icon">🛏️</div>
+        <div class="info">
+            <div class="num">14</div>
+            <div class="label">Available Rooms</div>
+        </div>
+    </div>
+    <div class="card card-red">
+        <div class="icon">📋</div>
+        <div class="info">
+            <div class="num">86</div>
+            <div class="label">Today's check-in</div>
+        </div>
+    </div>
+    <div class="card card-orange">
+        <div class="icon">👥</div>
+        <div class="info">
+            <div class="num">286</div>
+            <div class="label">VIP Number</div>
+        </div>
+    </div>
+</div>
+<div class="chart-group">
+    <div class="chart-card">
+        <div class="chart-title">Recent seven-day order trend</div>
+        <canvas id="trendChart"></canvas>
+    </div>
+    <div class="chart-card">
+        <div class="chart-title">Order status distribution</div>
+        <canvas id="statusChart"></canvas>
+    </div>
+    <div class="chart-card">
+        <div class="chart-title">Distribution of room types</div>
+        <canvas id="roomTypeChart"></canvas>
+    </div>
+</div>
+<script src="../js/Dashboard.js"></script>
+</body>
+</html>

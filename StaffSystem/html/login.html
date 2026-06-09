@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff login</title>
+   <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+<div class="container">
+        <div class="wrap">
+            <div class="left">
+    <div class="left-content">
+        <div class="left-brand">YZLUXE HOTEL</div>
+        <div class="left-slogan">Elegance Redefined</div>
+    </div>
+</div>
+            <div class="right">
+                <form id="loginForm">
+                    <legend>Staff Login</legend>
+                    <div class="form-group">
+                        <input type="text" id="username" name="username" autocomplete="off" class="basic_information" placeholder="Username" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="job_number" name="job_number" class="basic_information" placeholder="Job Number" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" autocomplete="off" class="basic_information" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <select name="department" id="dep_type" onchange="update()">
+                            <option value="" selected>- Department Type -</option>
+                            <option value="Guest">Guest Service Department</option>
+                            <option value="Back">Back Office Department</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="specific_dep" id="specific_dep">
+                            <option value="" selected>- Specific Department -</option>
+                        </select>
+                    </div>
+                    <div class="option-row">
+                        <label class="remember">
+                            <input type="checkbox"> Remember me
+                        </label>
+                        <a href="forgetPass.html" class="forgot">Forgot Password?</a>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="login" id="login" value="Login" onclick="handleLogin()">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="back-btn" value="Back" onclick="window.location.href='../../Clientpage/html/Choice.html'">
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+<script src="../js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback - Hotel Dining</title>
+    <link rel="stylesheet" href="../public/style.css">
+    <link rel="stylesheet" href="../cusStyle/analytics.css">
+</head>
+<body>
+<div id="header-container"></div>
+<main>
+    <section id="analytics">
+        <div class="feedback-container">
+            <div class="feedback-info-side">
+                <div class="welcome-message">
+                    <h3>GUEST CORNER</h3>
+                    <p>Every dining experience matters to us. Please leave your valuable feedback to help us continuously improve our star-rated dining quality.</p>
+                </div>
+                <div class="rating-dimensions">
+                    <h4>Dimensions</h4>
+                    <div class="rating-row">
+                        <span>Food Quality</span>
+                        <select id="rating-food" name="rating-food">
+                            <option value="5">Excellent (5 Stars)</option>
+                            <option value="4">Good (4 Stars)</option>
+                            <option value="3">Average (3 Stars)</option>
+                            <option value="2">Poor (2 Stars)</option>
+                        </select>
+                    </div>
+                    <div class="rating-row">
+                        <span>Service Attitude</span>
+                        <select id="rating-service" name="rating-service">
+                            <option value="5">Excellent (5 Stars)</option>
+                            <option value="4">Good (4 Stars)</option>
+                            <option value="3">Average (3 Stars)</option>
+                            <option value="2">Poor (2 Stars)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="feedback-form-side">
+                <form class="rich-feedback-form" onsubmit="return submitFeedback(event)">
+                    <div class="form-section">
+                        <label class="section-label">Quick Tags</label>
+                        <div class="tags-container">
+                            <span class="feedback-tag" onclick="toggleTag(this)">Fresh Ingredients</span>
+                            <span class="feedback-tag" onclick="toggleTag(this)">Exquisite Presentation</span>
+                            <span class="feedback-tag" onclick="toggleTag(this)">Elegant Environment</span>
+                            <span class="feedback-tag" onclick="toggleTag(this)">Thoughtful Service</span>
+                            <span class="feedback-tag" onclick="toggleTag(this)">Fast Service</span>
+                            <span class="feedback-tag" onclick="toggleTag(this)">Cost-Effective</span>
+                        </div>
+                    </div>
+                    <div class="form-section row-inputs">
+                        <div class="input-group">
+                            <label for="room-number">Room No. (Optional)</label>
+                            <input type="text" id="room-number" placeholder="e.g. 8012">
+                        </div>
+                        <div class="input-group">
+                            <label for="guest-name">Name (Optional)</label>
+                            <input type="text" id="guest-name" placeholder="Mr. / Ms.">
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <label for="suggestions" class="section-label">Detailed Review</label>
+                        <textarea id="suggestions" placeholder="Please leave your valuable suggestions, any length is welcome..." rows="4" required></textarea>
+                    </div>
+                    <div class="submit-wrapper">
+                        <button type="submit">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+<div id="footer-container"></div>
+<script src="../public/common.js"></script>
+<script src="../js/analytics.js"></script>
+</body>
+</html>

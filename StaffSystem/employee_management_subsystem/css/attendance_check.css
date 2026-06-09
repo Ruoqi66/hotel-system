@@ -1,0 +1,125 @@
+#attendanceTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: white;
+    table-layout: fixed;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+#attendanceTable th,
+#attendanceTable td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+#attendanceTable th {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    font-weight: 600;
+    color: #1a3a5c;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#attendanceTable tr:hover {
+    background: #f8fafc;
+}
+
+#attendanceTable tr:last-child td {
+    border-bottom: none;
+}
+
+.attendance-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.attendance-status.present {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.attendance-status.absent {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.attendance-status.late {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.attendance-status.leave {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.attendance-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.summary-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    text-align: center;
+}
+
+.summary-card.present {
+    border-top: 4px solid #43e97b;
+}
+
+.summary-card.absent {
+    border-top: 4px solid #ef4444;
+}
+
+.summary-card.late {
+    border-top: 4px solid #f59e0b;
+}
+
+.summary-card.leave {
+    border-top: 4px solid #3b82f6;
+}
+
+.summary-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a3a5c;
+    margin-bottom: 4px;
+}
+
+.summary-label {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.date-filter {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.date-filter label {
+    font-weight: 500;
+    color: #1a3a5c;
+}
+
+.date-filter input {
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Training Plan Management</title>
+    <link rel="stylesheet" href="../public/common.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Training Plan Management</h2>
+            <form id="trainingPlanForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="planName">Training Plan Name *</label>
+                        <input type="text" id="planName" name="planName" required placeholder="e.g., Customer Service Excellence Training">
+                    </div>
+                    <div class="form-group">
+                        <label for="trainingType">Training Type *</label>
+                        <select id="trainingType" name="trainingType" required>
+                            <option value="">Select Type</option>
+                            <option value="Professional Skills">Professional Skills</option>
+                            <option value="Management Training">Management Training</option>
+                            <option value="Technical Training">Technical Training</option>
+                            <option value="Safety Training">Safety Training</option>
+                            <option value="Customer Service">Customer Service</option>
+                            <option value="Language Training">Language Training</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="trainingContent">Training Content *</label>
+                    <textarea id="trainingContent" name="trainingContent" rows="4" required placeholder="Describe the training content and objectives..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startDate">Start Date *</label>
+                        <input type="date" id="startDate" name="startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date *</label>
+                        <input type="date" id="endDate" name="endDate" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="trainingTime">Training Time *</label>
+                        <input type="time" id="trainingTime" name="trainingTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration (hours) *</label>
+                        <input type="number" id="duration" name="duration" min="1" required placeholder="e.g., 8">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="location">Training Location *</label>
+                        <input type="text" id="location" name="location" required placeholder="e.g., Conference Room A, Building 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="trainer">Trainer/Instructor *</label>
+                        <input type="text" id="trainer" name="trainer" required placeholder="e.g., John Smith">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="maxParticipants">Maximum Participants *</label>
+                        <input type="number" id="maxParticipants" name="maxParticipants" min="1" required placeholder="e.g., 30">
+                    </div>
+                    <div class="form-group">
+                        <label for="targetDepartment">Target Department</label>
+                        <select id="targetDepartment" name="targetDepartment">
+                            <option value="">All Departments</option>
+                            <option value="Guest Service Department">Guest Service Department</option>
+                            <option value="Back office Department">Back office Department</option>
+                            <option value="Housekeeping Department">Housekeeping Department</option>
+                            <option value="Restaurant and Bar Department">Restaurant and Bar Department</option>
+                            <option value="Finance Department">Finance Department</option>
+                            <option value="Human resource Department">Human Resource Department</option>
+                            <option value="Engineering Department">Engineering Department</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="prerequisites">Prerequisites</label>
+                    <textarea id="prerequisites" name="prerequisites" rows="2" placeholder="Any prerequisites for this training..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="budget">Budget (Optional)</label>
+                    <input type="number" id="budget" name="budget" min="0" step="0.01" placeholder="Training budget amount">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Additional Notes</label>
+                    <textarea id="description" name="description" rows="3" placeholder="Any additional information about the training..."></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn-primary">Save Training Plan</button>
+                    <button type="reset" class="btn-secondary">Clear Form</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="../js/training_plan_management.js"></script>
+</body>
+</html>

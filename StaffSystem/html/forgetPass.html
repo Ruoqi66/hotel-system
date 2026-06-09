@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="../css/forgetPass.css">
+</head>
+<body>
+<h1>Forgot Password</h1>
+<form>
+    <div class="form-group">
+        <input type="text" placeholder="Username:">
+    </div>
+    <div class="form-group">
+        <input type="text" placeholder="Job Number:">
+    </div>
+    <div class="form-group code-row">
+        <input type="text" placeholder="Verification Code:" id="send">
+        <button type="button" class="code-box" id="sendBtn">发送验证码</button>
+    </div>
+    <div class="form-group">
+        <input type="password" placeholder="New Password:">
+    </div>
+    <div class="form-group">
+        <input type="password" placeholder="Confirm New Password:">
+    </div>
+    <div class="form-group code-row">
+        <input type="text" placeholder="Verification Code:" id="codeInput">
+        <span class="code-box" id="codeBox">8A7S</span>
+    </div>
+    <button type="button" class="reset-btn">Reset Password</button>
+
+    <div class="back">
+        <a href="login.html">Back to Login</a>
+    </div>
+</form>
+<script src="../js/forgetPass.js"></script>
+</body>
+</html>

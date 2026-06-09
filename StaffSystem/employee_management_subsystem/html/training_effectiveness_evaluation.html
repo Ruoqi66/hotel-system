@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Training Effectiveness Evaluation</title>
+     <link rel="stylesheet" href="../public/common.css">
+     <link rel="stylesheet" href="../css/training_effectiveness_evaluation.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Training Effectiveness Evaluation</h2>
+
+            <div class="nav-tabs">
+                <button onclick="showSection('createEvaluation')" class="active">Create Evaluation</button>
+                <button onclick="showSection('viewEvaluations')">View Evaluations</button>
+                <button onclick="showSection('analytics')">Analytics & Reports</button>
+            </div>
+
+            <div id="createEvaluation" class="section active">
+                <h3>Create Training Evaluation</h3>
+                <form id="evaluationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="evalTraining">Select Training Program *</label>
+                            <select id="evalTraining" name="evalTraining" required onchange="loadEnrolledEmployees()">
+                                <option value="">Select Training</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="evalEmployee">Select Employee *</label>
+                            <select id="evalEmployee" name="evalEmployee" required>
+                                <option value="">Select Employee</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="evaluatorName">Evaluator Name *</label>
+                            <input type="text" id="evaluatorName" name="evaluatorName" required placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="evaluatorRole">Evaluator Role *</label>
+                            <select id="evaluatorRole" name="evaluatorRole" required>
+                                <option value="">Select Role</option>
+                                <option value="Participant">Training Participant</option>
+                                <option value="Manager">Manager/Supervisor</option>
+                                <option value="HR">HR Professional</option>
+                                <option value="Trainer">Trainer/Instructor</option>
+                                <option value="External">External Evaluator</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4>1. Training Content Quality</h4>
+                        <div class="rating-group">
+                            <div class="rating-label">Relevance to Job Requirements</div>
+                            <div class="rating-stars" data-rating="contentRelevance">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" id="contentRelevance" name="contentRelevance" required>
+                        </div>
+
+                        <div class="rating-group">
+                            <div class="rating-label">Clarity and Organization</div>
+                            <div class="rating-stars" data-rating="contentClarity">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" id="contentClarity" name="contentClarity" required>
+                        </div>
+
+                        <div class="rating-group">
+                            <div class="rating-label">Depth and Comprehensiveness</div>
+                            <div class="rating-stars" data-rating="contentDepth">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" id="contentDepth" name="contentDepth" required>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4>2. Trainer Performance</h4>
+                        <div class="rating-group">
+                            <div class="rating-label">Knowledge and Expertise</div>
+                            <div class="rating-stars" data-rating="learningOutcome">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" id="learningOutcome" name="learningOutcome" required>
+                        </div>
+
+                        <div class="rating-group">
+                            <div class="rating-label">Applicability to Work</div>
+                            <div class="rating-stars" data-rating="applicability">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" id="applicability" name="applicability" required>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4>3. Overall Assessment</h4>
+                        <div class="rating-group">
+                            <div class="rating-label">Overall Satisfaction</div>
+                            <div class="rating-stars" data-rating="overallSatisfaction">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" id="overallSatisfaction" name="overallSatisfaction" required>
+                        </div>
+
+                        <div class="rating-group">
+                            <div class="rating-label">Would Recommend to Others</div>
+                            <div class="rating-stars" data-rating="recommendation">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" id="recommendation" name="recommendation" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="strengths">Strengths of the Training</label>
+                        <textarea id="strengths" name="strengths" placeholder="What aspects of the training were most valuable?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weaknesses">Areas for Improvement</label>
+                        <textarea id="weaknesses" name="weaknesses" placeholder="What could be improved in future training sessions?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="suggestions">Suggestions for Future Training</label>
+                        <textarea id="suggestions" name="suggestions" placeholder="Any additional comments or suggestions?"></textarea>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary">Submit Evaluation</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="viewEvaluations" class="section">
+                <h3>Training Evaluations</h3>
+                <table id="evaluationsTable">
+                    <thead>
+                        <tr>
+                            <th>Training Program</th>
+                            <th>Evaluator</th>
+                            <th>Role</th>
+                            <th>Overall Rating</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="evaluationsList">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="analytics" class="section">
+                <h3>Analytics & Reports</h3>
+
+                <div class="grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalEvaluations">0</div>
+                        <div class="stat-label">Total Evaluations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgRating">0.0</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="excellentRate">0%</div>
+                        <div class="stat-label">Excellent Rate (4-5★)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="completionRate">0%</div>
+                        <div class="stat-label">Evaluation Completion</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Rating Distribution by Category</h4>
+                    <div id="categoryRatings"></div>
+                </div>
+
+                <div class="card">
+                    <h4>Training Programs Ranking</h4>
+                    <table id="programsRanking">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Training Program</th>
+                                <th>Average Rating</th>
+                                <th>Total Evaluations</th>
+                                <th>Performance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rankingList">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h4>Detailed Performance Metrics</h4>
+                    <div id="performanceMetrics"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<script src="../js/training_effectiveness_evaluation.js"></script>
+</body>
+</html>

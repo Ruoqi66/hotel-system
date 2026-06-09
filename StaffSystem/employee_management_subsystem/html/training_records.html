@@ -11,11 +11,11 @@
             <h2>Training Records Management</h2>
             
             <div class="nav-tabs">
-                <button onclick="navigateTo('training_plan_management.html')">← Back to Training Plans</button>
-                <button onclick="showSection('recordAttendance')" class="active">Record Attendance</button>
-                <button onclick="showSection('recordGrades')">Record Grades</button>
-                <button onclick="showSection('viewRecords')">View Records</button>
-                <button onclick="navigateTo('training_effectiveness_evaluation.html')">Training Evaluation</button>
+                <button id="navBack">← Back to Training Plans</button>
+                <button id="navRecordAttendance" class="active">Record Attendance</button>
+                <button id="navRecordGrades">Record Grades</button>
+                <button id="navViewRecords">View Records</button>
+                <button id="navTrainingEvaluation">Training Evaluation</button>
             </div>
 
             <div class="grid">
@@ -43,7 +43,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="selectTraining">Select Training Plan *</label>
-                            <select id="selectTraining" name="selectTraining" required onchange="loadEnrolledEmployees()">
+                            <select id="selectTraining" name="selectTraining" required>
                                 <option value="">Select Training</option>
                             </select>
                         </div>
@@ -78,7 +78,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="selectTrainingForGrades">Select Training Plan *</label>
-                            <select id="selectTrainingForGrades" name="selectTrainingForGrades" required onchange="loadEmployeesForGrades()">
+                            <select id="selectTrainingForGrades" name="selectTrainingForGrades" required>
                                 <option value="">Select Training</option>
                             </select>
                         </div>
@@ -120,17 +120,17 @@
                 <div class="form-row" style="margin-bottom: 16px;">
                     <div class="form-group">
                         <label for="searchEmployee">Search by employee name</label>
-                        <input type="text" id="searchEmployee" placeholder="Search by employee name..." onkeyup="filterRecords()">
+                        <input type="text" id="searchEmployee" placeholder="Search by employee name...">
                     </div>
                     <div class="form-group">
                         <label for="filterTraining">Filter Training</label>
-                        <select id="filterTraining" onchange="filterRecords()">
+                        <select id="filterTraining">
                             <option value="">All Trainings</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="filterAttendance">Attendance Status</label>
-                        <select id="filterAttendance" onchange="filterRecords()">
+                        <select id="filterAttendance">
                             <option value="">All Attendance Status</option>
                             <option value="Present">Present</option>
                             <option value="Absent">Absent</option>
@@ -138,7 +138,7 @@
                     </div>
                     <div class="form-group">
                         <label for="filterGrade">Grade Range</label>
-                        <select id="filterGrade" onchange="filterRecords()">
+                        <select id="filterGrade">
                             <option value="">All Grades</option>
                             <option value="90-100">Excellent (90-100)</option>
                             <option value="80-89">Good (80-89)</option>
@@ -148,7 +148,7 @@
                     </div>
                 </div>
                 
-                <button class="btn-primary" onclick="exportRecords()">Export Records</button>
+                <button class="btn-primary" id="btnExportRecords">Export Records</button>
 
                 <table id="recordsTable">
                     <thead>

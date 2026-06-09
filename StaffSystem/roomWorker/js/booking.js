@@ -133,6 +133,8 @@ function staffBookRoom() {
     if (checkOutDate) checkOutDate.value = '';
 
     loadBookingTable();
+    
+    localStorage.setItem('bookingUpdated', Date.now().toString());
 }
 
 function loadBookingTable() {
@@ -191,6 +193,7 @@ function checkInBooking(bookingId) {
         updateCustomerInfo(b);
         loadBookingTable();
         alert('Check-in successful! Room: ' + b.roomNo);
+        location.reload();
     }
 }
 

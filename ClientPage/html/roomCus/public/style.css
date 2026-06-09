@@ -66,6 +66,15 @@ nav a:hover {
     color: #051c33;
 }
 
+nav a.back-btn {
+    color: #666;
+    font-weight: 600;
+}
+
+nav a.back-btn:hover {
+    color: #051c33;
+}
+
 .btn-primary {
     background: #051c33;
     color: white;

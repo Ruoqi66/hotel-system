@@ -16,6 +16,26 @@ function updateCurrentTime() {
     }
 }
 
+function refreshCheckInOutPage() {
+    let frm = document.getElementById("data");
+    if (frm) {
+        const currentSrc = frm.src;
+        if (currentSrc.includes('check-in-out')) {
+            console.log('Refreshing check-in-out page');
+            frm.contentWindow.location.reload();
+        }
+    }
+}
+
+window.refreshCheckInOutPage = refreshCheckInOutPage;
+
+window.addEventListener('storage', function(e) {
+    if (e.key === 'bookingUpdated') {
+        console.log('Booking updated detected in parent');
+        refreshCheckInOutPage();
+    }
+});
+
 window.onload = function () {
     // ===== 1. 更新当前时间 =====
     updateCurrentTime();

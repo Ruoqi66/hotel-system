@@ -12,9 +12,9 @@
             <h2>Training Effectiveness Evaluation</h2>
 
             <div class="nav-tabs">
-                <button onclick="showSection('createEvaluation')" class="active">Create Evaluation</button>
-                <button onclick="showSection('viewEvaluations')">View Evaluations</button>
-                <button onclick="showSection('analytics')">Analytics & Reports</button>
+                <button id="navCreateEvaluation" class="active">Create Evaluation</button>
+                <button id="navViewEvaluations">View Evaluations</button>
+                <button id="navAnalytics">Analytics & Reports</button>
             </div>
 
             <div id="createEvaluation" class="section active">
@@ -23,7 +23,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="evalTraining">Select Training Program *</label>
-                            <select id="evalTraining" name="evalTraining" required onchange="loadEnrolledEmployees()">
+                            <select id="evalTraining" name="evalTraining" required>
                                 <option value="">Select Training</option>
                             </select>
                         </div>

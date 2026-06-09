@@ -1,6 +1,20 @@
 let trainingPlans = JSON.parse(localStorage.getItem("trainingPlans") || "[]");
 let currentFilter = 'all';
 
+function getStatusBasedOnDate(plan) {
+    const now = new Date();
+    const startDate = new Date(plan.startDate);
+    const endDate = new Date(plan.endDate);
+    
+    if (now < startDate) {
+        return 'Planned';
+    } else if (now >= startDate && now <= endDate) {
+        return 'Ongoing';
+    } else {
+        return 'Completed';
+    }
+}
+
 function displayPlans(plansToShow = null) {
     const container = document.getElementById("plansListContainer");
     container.innerHTML = "";
@@ -8,7 +22,7 @@ function displayPlans(plansToShow = null) {
     let plans = plansToShow || trainingPlans;
 
     if (currentFilter !== 'all') {
-        plans = plans.filter(plan => plan.status === currentFilter);
+        plans = plans.filter(plan => getStatusBasedOnDate(plan) === currentFilter);
     }
 
     if (plans.length === 0) {
@@ -18,6 +32,8 @@ function displayPlans(plansToShow = null) {
 
     plans.forEach(plan => {
         const row = document.createElement("tr");
+        const status = getStatusBasedOnDate(plan);
+        const statusClass = `status-badge status-${status.toLowerCase()}`;
 
         row.innerHTML = `            <td>${plan.planName}</td>
             <td>${plan.trainingType}</td>
@@ -27,7 +43,7 @@ function displayPlans(plansToShow = null) {
             <td>${formatDate(plan.endDate)}</td>
             <td>${plan.trainingTime}</td>
             <td>${plan.enrolledCount}/${plan.maxParticipants}</td>
-            <td>${plan.status}</td>
+            <td><span class="${statusClass}">${status}</span></td>
         `;
 
         container.appendChild(row);

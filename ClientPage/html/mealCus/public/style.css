@@ -82,6 +82,19 @@ nav a.active-nav {
     color: #c5a880;
 }
 
+nav a.back-btn {
+    color: #999;
+    font-weight: 500;
+}
+
+nav a.back-btn:hover {
+    color: #c5a880;
+}
+
+nav a.back-btn:hover::after {
+    width: 0;
+}
+
 nav ul {
     list-style: none;
     display: flex;

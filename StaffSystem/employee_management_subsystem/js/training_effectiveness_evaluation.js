@@ -1,16 +1,48 @@
   function showSection(sectionId) {
-        document.querySelectorAll('.section').forEach(section => {
-            section.classList.remove('active');
-        });
-        document.getElementById(sectionId).classList.add('active');
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+    document.getElementById(sectionId).classList.add('active');
 
-        if (sectionId === 'viewEvaluations') {
-            loadEvaluations();
-        } else if (sectionId === 'analytics') {
-            loadAnalytics();
-        }
+    document.querySelectorAll('.nav-tabs button').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    const navButtonMap = {
+        'createEvaluation': 'navCreateEvaluation',
+        'viewEvaluations': 'navViewEvaluations',
+        'analytics': 'navAnalytics'
+    };
+    
+    const activeTab = document.getElementById(navButtonMap[sectionId]);
+    if (activeTab) {
+        activeTab.classList.add('active');
     }
 
+    if (sectionId === 'viewEvaluations') {
+        loadEvaluations();
+    } else if (sectionId === 'analytics') {
+        loadAnalytics();
+    }
+}
+
+function initEventListeners() {
+    document.getElementById('navCreateEvaluation').addEventListener('click', function() {
+        showSection('createEvaluation');
+    });
+    
+    document.getElementById('navViewEvaluations').addEventListener('click', function() {
+        showSection('viewEvaluations');
+    });
+    
+    document.getElementById('navAnalytics').addEventListener('click', function() {
+        showSection('analytics');
+    });
+    
+    document.getElementById('evalTraining').addEventListener('change', loadEnrolledEmployees);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.rating-stars').forEach(container => {
         const fieldName = container.dataset.rating;
         const stars = container.querySelectorAll('.star');
@@ -44,6 +76,7 @@
             });
         });
     });
+});
 
         function loadTrainingPrograms() {
          const trainings = JSON.parse(localStorage.getItem('trainingPlans') || '[]');
@@ -136,16 +169,16 @@
 
 
     function loadEvaluations() {
-        const evaluations = JSON.parse(localStorage.getItem('evaluations') || '[]');
-        const tbody = document.getElementById('evaluationsList');
-        tbody.innerHTML = '';
+    const evaluations = JSON.parse(localStorage.getItem('evaluations') || '[]');
+    const tbody = document.getElementById('evaluationsList');
+    tbody.innerHTML = '';
 
-        evaluations.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    evaluations.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
-        evaluations.forEach(eval => {
-            const avgRating = calculateAverageRating(eval);
-            const row = document.createElement('tr');
-            row.innerHTML = `
+    evaluations.forEach(eval => {
+        const avgRating = calculateAverageRating(eval);
+        const row = document.createElement('tr');
+        row.innerHTML = `
                 <td>${eval.trainingName}</td>
                 <td>${eval.employeeName || 'N/A'}</td>
                 <td>${eval.evaluatorName}</td>
@@ -153,13 +186,19 @@
                 <td><span class="badge ${getRatingBadgeClass(avgRating)}">${avgRating.toFixed(1)} ★</span></td>
                 <td>${eval.date}</td>
                 <td>
-                    <button class="nav-btn" onclick="viewEvaluationDetail(${eval.id})">View Details</button>
+                    <button class="nav-btn view-eval-btn" data-eval-id="${eval.id}">View Details</button>
                 </td>
             `;
 
-            tbody.appendChild(row);
+        tbody.appendChild(row);
+    });
+
+    document.querySelectorAll('.view-eval-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            viewEvaluationDetail(parseInt(this.dataset.evalId));
         });
-    }
+    });
+}
 
     function calculateAverageRating(eval) {
         const ratings = [
@@ -342,6 +381,7 @@
     }
 
        window.addEventListener('load', function() {
-        loadTrainingPrograms();
-        showSection('createEvaluation');
-    });
+    initEventListeners();
+    loadTrainingPrograms();
+    showSection('createEvaluation');
+});

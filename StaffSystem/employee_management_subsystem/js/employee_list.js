@@ -24,7 +24,7 @@ function loadEmployeeList(){
             '<td>' + emp.position + '</td>' +
             '<td><a href="#">Personal Information Document</a></td>' +
             '<td><img src="#" alt="Employee photo"></td>' +
-            '<td><a href="remove_employee.html?name=' + encodeURIComponent(emp.name) + '" target="_top">Delete</a> | <a href="update_employee.html?name=' + encodeURIComponent(emp.name) + '" target="_top">Update</a></td>';
+            '<td><a href="remove_employee.html?name=' + encodeURIComponent(emp.name) + '">Delete</a> | <a href="update_employee.html?name=' + encodeURIComponent(emp.name) + '">Update</a></td>';
         tbody.appendChild(row);
     })    }
 
@@ -55,7 +55,7 @@ function loadEmployeeList(){
     tbody.innerHTML = '';
     matched.forEach(emp => {
         const row = document.createElement("tr");
-        row.innerHTML = '<td>' + emp.name + '</td><td>' + emp.gender + '</td><td>' + emp.age + '</td><td>' + emp.contact + '</td><td>' + emp.date + '</td><td>' + emp.department + '</td><td>' + emp.position + '</td><td><a href="remove_employee.html?name=' + encodeURIComponent(emp.name) + '" target="_top">Delete</a> | <a href="update_employee.html?name=' + encodeURIComponent(emp.name) + '" target="_top">Update</a></td>';
+        row.innerHTML = '<td>' + emp.name + '</td><td>' + emp.gender + '</td><td>' + emp.age + '</td><td>' + emp.contact + '</td><td>' + emp.date + '</td><td>' + emp.department + '</td><td>' + emp.position + '</td><td><a href="remove_employee.html?name=' + encodeURIComponent(emp.name) + '">Delete</a> | <a href="update_employee.html?name=' + encodeURIComponent(emp.name) + '">Update</a></td>';
         tbody.appendChild(row);
     });
 }

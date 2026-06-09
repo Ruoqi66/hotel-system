@@ -9,23 +9,48 @@ function initFeePage() {
 }
 
 function setupFeeForm() {
-    const submitBtn = document.querySelector('#fee-settle .btn-primary');
-    if (!submitBtn) return;
-
+    const card = document.querySelector('#fee-settle .card');
+    if (!card) {
+        console.log('Error: Card element not found');
+        return;
+    }
+    
+    const buttons = card.querySelectorAll('.btn-primary');
+    if (buttons.length === 0) {
+        console.log('Error: No Settle Bill button found');
+        return;
+    }
+    
+    const submitBtn = buttons[0];
+    console.log('Found Settle Bill button, adding click listener');
+    
     submitBtn.addEventListener('click', function (e) {
         e.preventDefault();
+        console.log('Settle Bill button clicked');
         settleFee();
     });
 }
 
 function settleFee() {
-    const roomInput = document.querySelector('#fee-settle input[placeholder="Enter room number"]');
-    const extraInput = document.querySelector('#fee-settle input[type="number"]');
-    const paymentSelect = document.querySelector('#fee-settle select');
+    const formGroups = document.querySelectorAll('#fee-settle .card .form-group');
+    
+    if (formGroups.length < 3) {
+        alert('Error: Form elements not found!');
+        return;
+    }
 
-    const roomNo = roomInput ? roomInput.value.trim() : '';
-    const extraCharge = extraInput ? parseFloat(extraInput.value) || 0 : 0;
-    const paymentMethod = paymentSelect ? paymentSelect.value : 'Cash Payment';
+    const roomInput = formGroups[0].querySelector('input');
+    const extraInput = formGroups[1].querySelector('input');
+    const paymentSelect = formGroups[2].querySelector('select');
+
+    if (!roomInput || !extraInput || !paymentSelect) {
+        alert('Error: Cannot find form elements!');
+        return;
+    }
+
+    const roomNo = roomInput.value.trim();
+    const extraCharge = parseFloat(extraInput.value) || 0;
+    const paymentMethod = paymentSelect.value;
 
     if (!roomNo) {
         alert('Please enter a room number!');
@@ -35,18 +60,46 @@ function settleFee() {
     const fees = getFees();
     const existingFee = fees.find(f => f.roomNo === roomNo && f.status === 'unpaid');
 
+    let roomCharge = 0;
+    let deposit = 0;
+    let totalAmount = 0;
+
+    if (existingFee) {
+        roomCharge = existingFee.roomCharge || 0;
+        deposit = existingFee.deposit || 0;
+        totalAmount = roomCharge + extraCharge - deposit;
+    } else {
+        totalAmount = extraCharge;
+    }
+
+    if (totalAmount < 0) {
+        totalAmount = 0;
+    }
+
+    const confirmMessage = `Please confirm settlement details:
+
+Room Number: ${roomNo}
+Room Charge: ¥${roomCharge.toLocaleString()}
+Additional Expenses: ¥${extraCharge.toLocaleString()}
+Deposit: -¥${deposit.toLocaleString()}
+━━━━━━━━━━━━━━━━━
+Total Amount: ¥${totalAmount.toLocaleString()}
+
+Payment Method: ${paymentMethod}
+
+Do you confirm this settlement?`;
+
+    if (!confirm(confirmMessage)) {
+        return;
+    }
+
     if (existingFee) {
         existingFee.additionalCharge = extraCharge;
-        existingFee.totalAmount = (existingFee.roomCharge || 0) + extraCharge - (existingFee.deposit || 0);
+        existingFee.totalAmount = totalAmount;
         existingFee.paymentMethod = paymentMethod;
         existingFee.status = 'paid';
         existingFee.paidAt = new Date().toISOString();
         saveFees(fees);
-        alert('Settlement successful!\nRoom: ' + roomNo +
-              '\nRoom Charge: ¥' + (existingFee.roomCharge || 0).toLocaleString() +
-              '\nAdditional: ¥' + extraCharge.toLocaleString() +
-              '\nPaid: ¥' + existingFee.totalAmount.toLocaleString() +
-              '\nMethod: ' + paymentMethod);
     } else {
         const feeRecord = {
             id: Date.now(),
@@ -64,13 +117,18 @@ function settleFee() {
         };
         fees.push(feeRecord);
         saveFees(fees);
-        alert('Manual settlement successful! Room: ' + roomNo +
-              '\nAmount: ¥' + extraCharge.toLocaleString() +
-              '\nMethod: ' + paymentMethod);
     }
 
-    if (roomInput) roomInput.value = '';
-    if (extraInput) extraInput.value = '0';
+    alert(`Payment Successful!
+
+Room Number: ${roomNo}
+Total Paid: ¥${totalAmount.toLocaleString()}
+Payment Method: ${paymentMethod}
+
+Thank you for your payment!`);
+
+    roomInput.value = '';
+    extraInput.value = '0';
     loadFeeTable();
 }
 

@@ -1,107 +1,154 @@
  let trainingRecords = JSON.parse(localStorage.getItem("trainingRecords") || "[]");
-        let trainingPlans = JSON.parse(localStorage.getItem("trainingPlans") || "[]");
-        let employees = JSON.parse(localStorage.getItem("employees") || "[]");
+let trainingPlans = JSON.parse(localStorage.getItem("trainingPlans") || "[]");
+let employees = JSON.parse(localStorage.getItem("employees") || "[]");
 
-        function navigateTo(page) {
-            window.location.href = page;
-        }
+function navigateTo(page) {
+    window.location.href = page;
+}
 
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.style.display = 'none';
-            });
-            document.getElementById(sectionId).style.display = 'block';
+function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(section => {
+        section.style.display = 'none';
+    });
+    document.getElementById(sectionId).style.display = 'block';
 
-            trainingPlans = JSON.parse(localStorage.getItem("trainingPlans") || "[]");
-            trainingRecords = JSON.parse(localStorage.getItem("trainingRecords") || "[]");
-            employees = JSON.parse(localStorage.getItem("employees") || "[]");
+    document.querySelectorAll('.nav-tabs button').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    const navButtonMap = {
+        'recordAttendance': 'navRecordAttendance',
+        'recordGrades': 'navRecordGrades',
+        'viewRecords': 'navViewRecords'
+    };
+    
+    const activeTab = document.getElementById(navButtonMap[sectionId]);
+    if (activeTab) {
+        activeTab.classList.add('active');
+    }
 
-            if (sectionId === 'recordAttendance' || sectionId === 'recordGrades') {
-                loadTrainingPlans();
-            } else if (sectionId === 'viewRecords') {
-                loadTrainingPlansForFilter();
-                displayRecords();
-            }
+    trainingPlans = JSON.parse(localStorage.getItem("trainingPlans") || "[]");
+    trainingRecords = JSON.parse(localStorage.getItem("trainingRecords") || "[]");
+    employees = JSON.parse(localStorage.getItem("employees") || "[]");
 
-            updateStatistics();
-        }
+    if (sectionId === 'recordAttendance' || sectionId === 'recordGrades') {
+        loadTrainingPlans();
+    } else if (sectionId === 'viewRecords') {
+        loadTrainingPlansForFilter();
+        displayRecords();
+    }
+
+    updateStatistics();
+}
+
+function initEventListeners() {
+    document.getElementById('navBack').addEventListener('click', function() {
+        navigateTo('training_plan_management.html');
+    });
+    
+    document.getElementById('navRecordAttendance').addEventListener('click', function() {
+        showSection('recordAttendance');
+    });
+    
+    document.getElementById('navRecordGrades').addEventListener('click', function() {
+        showSection('recordGrades');
+    });
+    
+    document.getElementById('navViewRecords').addEventListener('click', function() {
+        showSection('viewRecords');
+    });
+    
+    document.getElementById('navTrainingEvaluation').addEventListener('click', function() {
+        navigateTo('training_effectiveness_evaluation.html');
+    });
+    
+    document.getElementById('selectTraining').addEventListener('change', loadEnrolledEmployees);
+    document.getElementById('selectTrainingForGrades').addEventListener('change', loadEmployeesForGrades);
+    
+    document.getElementById('searchEmployee').addEventListener('keyup', filterRecords);
+    document.getElementById('filterTraining').addEventListener('change', filterRecords);
+    document.getElementById('filterAttendance').addEventListener('change', filterRecords);
+    document.getElementById('filterGrade').addEventListener('change', filterRecords);
+    
+    document.getElementById('btnExportRecords').addEventListener('click', exportRecords);
+}
 
 
         function loadTrainingPlans() {
-            const select1 = document.getElementById("selectTraining");
-            const select2 = document.getElementById("selectTrainingForGrades");
+    const select1 = document.getElementById("selectTraining");
+    const select2 = document.getElementById("selectTrainingForGrades");
 
-            select1.innerHTML = '<option value="">Select Training</option>';
-            select2.innerHTML = '<option value="">Select Training</option>';
+    select1.innerHTML = '<option value="">Select Training</option>';
+    select2.innerHTML = '<option value="">Select Training</option>';
 
-            trainingPlans.forEach(plan => {
-                const option1 = document.createElement("option");
-                option1.value = plan.id;
-                option1.textContent = `${plan.planName} (${plan.trainingType})`;
-                select1.appendChild(option1);
+    trainingPlans.forEach(plan => {
+        const option1 = document.createElement("option");
+        option1.value = plan.id;
+        option1.textContent = `${plan.planName} (${plan.trainingType})`;
+        select1.appendChild(option1);
 
-                const option2 = document.createElement("option");
-                option2.value = plan.id;
-                option2.textContent = `${plan.planName} (${plan.trainingType})`;
-                select2.appendChild(option2);
-            });
-        }
+        const option2 = document.createElement("option");
+        option2.value = plan.id;
+        option2.textContent = `${plan.planName} (${plan.trainingType})`;
+        select2.appendChild(option2);
+    });
+}
 
-        function loadTrainingPlansForFilter() {
-            const select = document.getElementById("filterTraining");
-            select.innerHTML = '<option value="">All Trainings</option>';
+function loadTrainingPlansForFilter() {
+    const select = document.getElementById("filterTraining");
+    select.innerHTML = '<option value="">All Trainings</option>';
 
-            trainingPlans.forEach(plan => {
-                const option = document.createElement("option");
-                option.value = plan.planName;
-                option.textContent = plan.planName;
-                select.appendChild(option);
-            });
-        }
+    trainingPlans.forEach(plan => {
+        const option = document.createElement("option");
+        option.value = plan.planName;
+        option.textContent = plan.planName;
+        select.appendChild(option);
+    });
+}
 
-        function loadEnrolledEmployees() {
-            const trainingId = document.getElementById("selectTraining").value;
-            const checklist = document.getElementById("employeeChecklist");
+function loadEnrolledEmployees() {
+    const trainingId = document.getElementById("selectTraining").value;
+    const checklist = document.getElementById("employeeChecklist");
 
-            if (!trainingId) {
-                checklist.innerHTML = '<p style="color: #999; text-align: center;">Please select a training plan first</p>';
-                return;
-            }
+    if (!trainingId) {
+        checklist.innerHTML = '<p style="color: #999; text-align: center;">Please select a training plan first</p>';
+        return;
+    }
 
-            const training = trainingPlans.find(p => p.id == trainingId);
-            if (!training) return;
+    const training = trainingPlans.find(p => p.id == trainingId);
+    if (!training) return;
 
-             let html = '';
-            employees.forEach(emp => {
-                html += `                    <div style="margin-bottom: 10px; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+    let html = '';
+    employees.forEach(emp => {
+        html += `                    <div style="margin-bottom: 10px; padding: 10px; background: #f8f9fa; border-radius: 5px;">
                         <label style="display: flex; align-items: center; cursor: pointer;">
                             <input type="checkbox" name="employeeAttendance" value="${emp.name}" data-employee='${JSON.stringify(emp)}' style="margin-right: 10px; width: 18px; height: 18px;">
                             <span><strong>${emp.name}</strong> - ${emp.department || 'N/A'} (${emp.position || 'N/A'})</span>
                         </label>
                     </div>
                 `;
-            });
+    });
 
-            checklist.innerHTML = html;
-        }
+    checklist.innerHTML = html;
+}
 
-                function loadEmployeesForGrades() {
-            const trainingId = document.getElementById("selectTrainingForGrades").value;
-            const gradesDiv = document.getElementById("gradesEntry");
+function loadEmployeesForGrades() {
+    const trainingId = document.getElementById("selectTrainingForGrades").value;
+    const gradesDiv = document.getElementById("gradesEntry");
 
-            if (!trainingId) {
-                gradesDiv.innerHTML = '<p style="color: #999; text-align: center;">Please select a training plan first</p>';
-                return;
-            }
+    if (!trainingId) {
+        gradesDiv.innerHTML = '<p style="color: #999; text-align: center;">Please select a training plan first</p>';
+        return;
+    }
 
-            let html = '';
-            employees.forEach(emp => {
-                const existingRecord = trainingRecords.find(r =>
-                    r.employeeName === emp.name && r.trainingId == trainingId
-                );
-            const existingGrade = existingRecord ? existingRecord.grade : '';
+    let html = '';
+    employees.forEach(emp => {
+        const existingRecord = trainingRecords.find(r =>
+            r.employeeName === emp.name && r.trainingId == trainingId
+        );
+        const existingGrade = existingRecord ? existingRecord.grade : '';
 
-                html += `
+        html += `
                     <div style="margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 5px; border-left: 4px solid #667eea;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                             <strong>${emp.name}</strong>
@@ -132,194 +179,193 @@
                         </div>
                     </div>
                 `;
-            });
+    });
 
-            gradesDiv.innerHTML = html;
+    gradesDiv.innerHTML = html;
 
-            employees.forEach(emp => {
-                const gradeInput = document.querySelector(`input[name="grade_${emp.name}"]`);
-                if (gradeInput && gradeInput.value) {
-                    updateGradeLevel(gradeInput, emp.name);
-                }
-            });
+    employees.forEach(emp => {
+        const gradeInput = document.querySelector(`input[name="grade_${emp.name}"]`);
+        if (gradeInput && gradeInput.value) {
+            updateGradeLevel(gradeInput, emp.name);
         }
+    });
+}
 
         function updateGradeLevel(input, empName) {
-            const grade = parseFloat(input.value);
-            const levelDiv = document.getElementById(`gradeLevel_${empName}`);
-            const levelSelect = document.getElementById(`levelSelect_${empName}`);
+    const grade = parseFloat(input.value);
+    const levelDiv = document.getElementById(`gradeLevel_${empName}`);
+    const levelSelect = document.getElementById(`levelSelect_${empName}`);
 
-            if (isNaN(grade)) {
-                levelDiv.textContent = '';
-                return;
+    if (isNaN(grade)) {
+        levelDiv.textContent = '';
+        return;
+    }
+
+    let level, color;
+    if (grade >= 90) {
+        level = 'Excellent';
+        color = '#28a745';
+    } else if (grade >= 80) {
+        level = 'Good';
+        color = '#17a2b8';
+    } else if (grade >= 70) {
+        level = 'Average';
+        color = '#ffc107';
+    } else {
+        level = 'Poor';
+        color = '#dc3545';
+    }
+
+    levelDiv.textContent = level;
+    levelDiv.style.color = color;
+
+    if (levelSelect.value === '') {
+        levelSelect.value = level;
+    }
+}
+
+document.getElementById("attendanceForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const trainingId = document.getElementById("selectTraining").value;
+    const training = trainingPlans.find(p => p.id == trainingId);
+
+    if (!training) {
+        alert("Please select a training plan!");
+        return;
+    }
+
+    const checkboxes = document.querySelectorAll('input[name="employeeAttendance"]:checked');
+    if (checkboxes.length === 0) {
+        alert("Please select at least one employee!");
+        return;
+    }
+
+    checkboxes.forEach(checkbox => {
+        const employee = checkbox.dataset.employee ? JSON.parse(checkbox.dataset.employee) : null;
+        if (!employee) return;
+
+        const record = {
+            id: Date.now() + Math.random(),
+            employeeName: employee.name,
+            employeeId: employee.id || '',
+            department: employee.department || '',
+            position: employee.position || '',
+            trainingId: trainingId,
+            trainingName: training.planName,
+            trainingType: training.trainingType,
+            attendanceDate: document.getElementById("attendanceDate").value,
+            attendance: "Present",
+            grade: null,
+            assessmentType: null,
+            comments: document.getElementById("attendanceNotes").value,
+            recordedAt: new Date().toISOString()
+        };
+
+        trainingRecords.push(record);
+    });
+
+    localStorage.setItem("trainingRecords", JSON.stringify(trainingRecords));
+
+    alert(`Attendance recorded for ${checkboxes.length} employee(s)!`);
+    this.reset();
+    document.getElementById("employeeChecklist").innerHTML = '<p style="color: #999; text-align: center;">Please select a training plan first</p>';
+    updateStatistics();
+});
+
+document.getElementById("gradesForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const trainingId = document.getElementById("selectTrainingForGrades").value;
+    const training = trainingPlans.find(p => p.id == trainingId);
+    const assessmentType = document.getElementById("assessmentType").value;
+
+    if (!training) {
+        alert("Please select a training plan!");
+        return;
+    }
+
+    let recordsSaved = 0;
+    employees.forEach(emp => {
+        const gradeInput = document.querySelector(`input[name="grade_${emp.name}"]`);
+        const commentInput = document.querySelector(`input[name="comment_${emp.name}"]`);
+        const levelSelect = document.getElementById(`levelSelect_${emp.name}`);
+
+        if (gradeInput && gradeInput.value !== '') {
+            const existingRecord = trainingRecords.find(r =>
+                r.employeeName === emp.name &&
+                r.trainingId == trainingId
+            );
+
+            const grade = parseFloat(gradeInput.value);
+            let gradeLevel = levelSelect.value;
+            if (!gradeLevel) {
+                if (grade >= 90) gradeLevel = 'Excellent';
+                else if (grade >= 80) gradeLevel = 'Good';
+                else if (grade >= 70) gradeLevel = 'Average';
+                else gradeLevel = 'Poor';
             }
 
-            let level, color;
-            if (grade >= 90) {
-                level = 'Excellent';
-                color = '#28a745';
-            } else if (grade >= 80) {
-                level = 'Good';
-                color = '#17a2b8';
-            } else if (grade >= 70) {
-                level = 'Average';
-                color = '#ffc107';
+            if (existingRecord) {
+                existingRecord.grade = grade;
+                existingRecord.gradeLevel = gradeLevel;
+                existingRecord.assessmentType = assessmentType;
+                existingRecord.gradeComments = commentInput ? commentInput.value : '';
+                existingRecord.generalComments = document.getElementById("gradeComments").value;
+                existingRecord.updatedAt = new Date().toISOString();
             } else {
-                level = 'Poor';
-                color = '#dc3545';
-            }
-
-            levelDiv.textContent = level;
-            levelDiv.style.color = color;
-
-            if (levelSelect.value === '') {
-                levelSelect.value = level;
-            }
-        }
-
-
-        document.getElementById("attendanceForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-
-            const trainingId = document.getElementById("selectTraining").value;
-            const training = trainingPlans.find(p => p.id == trainingId);
-
-            if (!training) {
-                alert("Please select a training plan!");
-                return;
-            }
-
-            const checkboxes = document.querySelectorAll('input[name="employeeAttendance"]:checked');
-            if (checkboxes.length === 0) {
-                alert("Please select at least one employee!");
-                return;
-            }
-
-            checkboxes.forEach(checkbox => {
-                const employee = checkbox.dataset.employee ? JSON.parse(checkbox.dataset.employee) : null;
-                if (!employee) return;
-
                 const record = {
                     id: Date.now() + Math.random(),
-                    employeeName: employee.name,
-                    employeeId: employee.id || '',
-                    department: employee.department || '',
-                    position: employee.position || '',
+                    employeeName: emp.name,
+                    employeeId: emp.id || '',
+                    department: emp.department || '',
+                    position: emp.position || '',
                     trainingId: trainingId,
                     trainingName: training.planName,
                     trainingType: training.trainingType,
-                    attendanceDate: document.getElementById("attendanceDate").value,
-                    attendance: "Present",
-                    grade: null,
-                    assessmentType: null,
-                    comments: document.getElementById("attendanceNotes").value,
+                    attendanceDate: new Date().toISOString().split('T')[0],
+                    attendance: "Unknown",
+                    grade: grade,
+                    gradeLevel: gradeLevel,
+                    assessmentType: assessmentType,
+                    comments: commentInput ? commentInput.value : '',
+                    generalComments: document.getElementById("gradeComments").value,
                     recordedAt: new Date().toISOString()
                 };
-
                 trainingRecords.push(record);
-            });
-
-            localStorage.setItem("trainingRecords", JSON.stringify(trainingRecords));
-
-            alert(`Attendance recorded for ${checkboxes.length} employee(s)!`);
-            this.reset();
-            document.getElementById("employeeChecklist").innerHTML = '<p style="color: #999; text-align: center;">Please select a training plan first</p>';
-            updateStatistics();
-        });
-
-                document.getElementById("gradesForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-
-            const trainingId = document.getElementById("selectTrainingForGrades").value;
-            const training = trainingPlans.find(p => p.id == trainingId);
-            const assessmentType = document.getElementById("assessmentType").value;
-
-            if (!training) {
-                alert("Please select a training plan!");
-                return;
             }
 
-            let recordsSaved = 0;
-            employees.forEach(emp => {
-                const gradeInput = document.querySelector(`input[name="grade_${emp.name}"]`);
-                const commentInput = document.querySelector(`input[name="comment_${emp.name}"]`);
-                const levelSelect = document.getElementById(`levelSelect_${emp.name}`);
+            recordsSaved++;
+        }
+    });
 
-                if (gradeInput && gradeInput.value !== '') {
-                    const existingRecord = trainingRecords.find(r =>
-                        r.employeeName === emp.name &&
-                        r.trainingId == trainingId
-                    );
+    localStorage.setItem("trainingRecords", JSON.stringify(trainingRecords));
 
-                    const grade = parseFloat(gradeInput.value);
-                    let gradeLevel = levelSelect.value;
-                    if (!gradeLevel) {
-                        if (grade >= 90) gradeLevel = 'Excellent';
-                        else if (grade >= 80) gradeLevel = 'Good';
-                        else if (grade >= 70) gradeLevel = 'Average';
-                        else gradeLevel = 'Poor';
-                    }
-
-                    if (existingRecord) {
-                        existingRecord.grade = grade;
-                        existingRecord.gradeLevel = gradeLevel;
-                        existingRecord.assessmentType = assessmentType;
-                        existingRecord.gradeComments = commentInput ? commentInput.value : '';
-                        existingRecord.generalComments = document.getElementById("gradeComments").value;
-                        existingRecord.updatedAt = new Date().toISOString();
-                    } else {
-                        const record = {
-                            id: Date.now() + Math.random(),
-                            employeeName: emp.name,
-                            employeeId: emp.id || '',
-                            department: emp.department || '',
-                            position: emp.position || '',
-                            trainingId: trainingId,
-                            trainingName: training.planName,
-                            trainingType: training.trainingType,
-                            attendanceDate: new Date().toISOString().split('T')[0],
-                            attendance: "Unknown",
-                            grade: grade,
-                            gradeLevel: gradeLevel,
-                            assessmentType: assessmentType,
-                            comments: commentInput ? commentInput.value : '',
-                            generalComments: document.getElementById("gradeComments").value,
-                            recordedAt: new Date().toISOString()
-                        };
-                        trainingRecords.push(record);
-                    }
-
-                    recordsSaved++;
-                }
-            });
-
-            localStorage.setItem("trainingRecords", JSON.stringify(trainingRecords));
-
-            alert(`Grades recorded for ${recordsSaved} employee(s)!`);
-            this.reset();
-            document.getElementById("gradesEntry").innerHTML = '<p style="color: #999; text-align: center;">Please select a training plan first</p>';
-            updateStatistics();
-        });
+    alert(`Grades recorded for ${recordsSaved} employee(s)!`);
+    this.reset();
+    document.getElementById("gradesEntry").innerHTML = '<p style="color: #999; text-align: center;">Please select a training plan first</p>';
+    updateStatistics();
+});
 
 
         function displayRecords(recordsToShow = null) {
-            const tbody = document.getElementById("recordsTableBody");
-            tbody.innerHTML = "";
+    const tbody = document.getElementById("recordsTableBody");
+    tbody.innerHTML = "";
 
-            let records = recordsToShow || trainingRecords;
+    let records = recordsToShow || trainingRecords;
 
-            if (records.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 30px;">No training records found</td></tr>';
-                return;
-            }
+    if (records.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 30px;">No training records found</td></tr>';
+        return;
+    }
 
-                records.forEach(record => {
-                const row = document.createElement("tr");
-                const attendanceClass = record.attendance === "Present" ? "attendance-present" : "attendance-absent";
-                const gradeBadge = getGradeBadge(record.grade);
-                const levelBadge = getLevelBadge(record.gradeLevel);
+    records.forEach(record => {
+        const row = document.createElement("tr");
+        const attendanceClass = record.attendance === "Present" ? "attendance-present" : "attendance-absent";
+        const gradeBadge = getGradeBadge(record.grade);
+        const levelBadge = getLevelBadge(record.gradeLevel);
 
-                row.innerHTML = `
+        row.innerHTML = `
                     <td>${Math.floor(record.id)}</td>
                     <td>${record.employeeName}</td>
                     <td>${record.trainingName}</td>
@@ -331,140 +377,160 @@
                     <td>${record.assessmentType || 'N/A'}</td>
                     <td>${record.comments || record.generalComments || ''}</td>
                     <td>
-                        <button class="btn btn-primary" onclick="viewRecordDetail('${record.id}')" style="padding: 5px 10px; font-size: 12px;">View</button>
-                        <button class="btn btn-danger" onclick="deleteRecord('${record.id}')" style="padding: 5px 10px; font-size: 12px;">Delete</button>
+                        <button class="btn btn-primary view-btn" data-record-id="${record.id}" style="padding: 5px 10px; font-size: 12px;">View</button>
+                        <button class="btn btn-danger delete-btn" data-record-id="${record.id}" style="padding: 5px 10px; font-size: 12px;">Delete</button>
                     </td>
                 `;
-                tbody.appendChild(row);
-            });
+        tbody.appendChild(row);
+    });
+
+    document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            viewRecordDetail(this.dataset.recordId);
+        });
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            deleteRecord(this.dataset.recordId);
+        });
+    });
+}
+
+function getGradeBadge(grade) {
+    if (grade === null || grade === undefined) return 'N/A';
+
+    let className = '';
+    if (grade >= 90) className = 'grade-excellent';
+    else if (grade >= 80) className = 'grade-good';
+    else if (grade >= 70) className = 'grade-average';
+    else className = 'grade-poor';
+
+    return `<span class="grade-badge ${className}">${grade}</span>`;
+}
+
+function getLevelBadge(level) {
+    if (!level) return 'N/A';
+
+    let className = '';
+    switch(level) {
+        case 'Excellent': className = 'level-excellent'; break;
+        case 'Good': className = 'level-good'; break;
+        case 'Average': className = 'level-average'; break;
+        case 'Poor': className = 'level-poor'; break;
+    }
+
+    return `<span class="level-badge ${className}">${level}</span>`;
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US');
+}
+
+function filterRecords() {
+    const searchTerm = document.getElementById("searchEmployee").value.toLowerCase();
+    const trainingFilter = document.getElementById("filterTraining").value;
+    const attendanceFilter = document.getElementById("filterAttendance").value;
+    const gradeFilter = document.getElementById("filterGrade").value;
+
+    let filtered = trainingRecords.filter(record => {
+        let match = true;
+
+        if (searchTerm && !record.employeeName.toLowerCase().includes(searchTerm)) {
+            match = false;
         }
 
-        function getGradeBadge(grade) {
-            if (grade === null || grade === undefined) return 'N/A';
-
-            let className = '';
-            if (grade >= 90) className = 'grade-excellent';
-            else if (grade >= 80) className = 'grade-good';
-            else if (grade >= 70) className = 'grade-average';
-            else className = 'grade-poor';
-
-            return `<span class="grade-badge ${className}">${grade}</span>`;
+        if (trainingFilter && record.trainingName !== trainingFilter) {
+            match = false;
         }
 
-        function getLevelBadge(level) {
-            if (!level) return 'N/A';
+        if (attendanceFilter && record.attendance !== attendanceFilter) {
+            match = false;
+        }
 
-            let className = '';
-            switch(level) {
-                case 'Excellent': className = 'level-excellent'; break;
-                case 'Good': className = 'level-good'; break;
-                case 'Average': className = 'level-average'; break;
-                case 'Poor': className = 'level-poor'; break;
+        if (gradeFilter && record.grade !== null) {
+            const [min, max] = gradeFilter.split('-').map(Number);
+            if (record.grade < min || record.grade > max) {
+                match = false;
             }
-
-            return `<span class="level-badge ${className}">${level}</span>`;
         }
 
+        return match;
+    });
 
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-US');
-        }
+    displayRecords(filtered);
+}
 
+function viewRecordDetail(recordId) {
+    const record = trainingRecords.find(r => r.id == recordId);
+    if (!record) return;
 
-        function filterRecords() {
-            const searchTerm = document.getElementById("searchEmployee").value.toLowerCase();
-            const trainingFilter = document.getElementById("filterTraining").value;
-            const attendanceFilter = document.getElementById("filterAttendance").value;
-            const gradeFilter = document.getElementById("filterGrade").value;
+    const details = `Record ID: ${Math.floor(record.id)}
+Employee: ${record.employeeName}
+Department: ${record.department || 'N/A'}
+Position: ${record.position || 'N/A'}
+Training: ${record.trainingName}
+Type: ${record.trainingType}
+Date: ${formatDate(record.attendanceDate)}
+Attendance: ${record.attendance}
+Grade: ${record.grade !== null ? record.grade : 'N/A'}
+Grade Level: ${record.gradeLevel || 'N/A'}
+Assessment: ${record.assessmentType || 'N/A'}
+Comments: ${record.comments || record.generalComments || 'None'}
+Recorded: ${new Date(record.recordedAt).toLocaleString()}`;
 
-            let filtered = trainingRecords.filter(record => {
-                let match = true;
+    alert(details);
+}
 
-                if (searchTerm && !record.employeeName.toLowerCase().includes(searchTerm)) {
-                    match = false;
-                }
+function deleteRecord(recordId) {
+    if (!confirm("Are you sure you want to delete this record?")) {
+        return;
+    }
 
-                if (trainingFilter && record.trainingName !== trainingFilter) {
-                    match = false;
-                }
+    trainingRecords = trainingRecords.filter(r => r.id != recordId);
+    localStorage.setItem("trainingRecords", JSON.stringify(trainingRecords));
+    displayRecords();
+    updateStatistics();
+    alert("Record deleted successfully!");
+}
 
-                if (attendanceFilter && record.attendance !== attendanceFilter) {
-                    match = false;
-                }
+function updateStatistics() {
+    const totalTrainings = new Set(trainingRecords.map(r => r.trainingId)).size;
+    const totalParticipants = new Set(trainingRecords.map(r => r.employeeName)).size;
 
-                if (gradeFilter && record.grade !== null) {
-                    const [min, max] = gradeFilter.split('-').map(Number);
-                    if (record.grade < min || record.grade > max) {
-                        match = false;
-                    }
-                }
+    const presentCount = trainingRecords.filter(r => r.attendance === "Present").length;
+    const attendanceRate = trainingRecords.length > 0 ? Math.round((presentCount / trainingRecords.length) * 100) : 0;
 
-                return match;
-            });
+    const gradedRecords = trainingRecords.filter(r => r.grade !== null);
+    const avgGrade = gradedRecords.length > 0 ?
+        Math.round(gradedRecords.reduce((sum, r) => sum + r.grade, 0) / gradedRecords.length) : 0;
 
-            displayRecords(filtered);
-        }
-
-
-         function viewRecordDetail(recordId) {
-            const record = trainingRecords.find(r => r.id == recordId);
-            if (!record) return;
-
-            const details = `Record ID: ${Math.floor(record.id)}Employee: ${record.employeeName}Department: ${record.department || 'N/A'}Position: ${record.position || 'N/A'}Training: ${record.trainingName}Type: ${record.trainingType}Date: ${formatDate(record.attendanceDate)}Attendance: ${record.attendance}Grade: ${record.grade !== null ? record.grade : 'N/A'}Grade Level: ${record.gradeLevel || 'N/A'}Assessment: ${record.assessmentType || 'N/A'}Comments: ${record.comments || record.generalComments || 'None'}Recorded: ${new Date(record.recordedAt).toLocaleString()}            `;
-
-            alert(details);
-        }
-
-        function deleteRecord(recordId) {
-            if (!confirm("Are you sure you want to delete this record?")) {
-                return;
-            }
-
-            trainingRecords = trainingRecords.filter(r => r.id != recordId);
-            localStorage.setItem("trainingRecords", JSON.stringify(trainingRecords));
-            displayRecords();
-            updateStatistics();
-            alert("Record deleted successfully!");
-        }
-
-
-
-
-        function updateStatistics() {
-            const totalTrainings = new Set(trainingRecords.map(r => r.trainingId)).size;
-            const totalParticipants = new Set(trainingRecords.map(r => r.employeeName)).size;
-
-            const presentCount = trainingRecords.filter(r => r.attendance === "Present").length;
-            const attendanceRate = trainingRecords.length > 0 ? Math.round((presentCount / trainingRecords.length) * 100) : 0;
-
-            const gradedRecords = trainingRecords.filter(r => r.grade !== null);
-            const avgGrade = gradedRecords.length > 0 ?
-                Math.round(gradedRecords.reduce((sum, r) => sum + r.grade, 0) / gradedRecords.length) : 0;
-
-            document.getElementById("totalTrainings").textContent = totalTrainings;
-            document.getElementById("totalParticipants").textContent = totalParticipants;
-            document.getElementById("avgAttendance").textContent = attendanceRate + '%';
-            document.getElementById("avgGrade").textContent = avgGrade;
-        }
+    document.getElementById("totalTrainings").textContent = totalTrainings;
+    document.getElementById("totalParticipants").textContent = totalParticipants;
+    document.getElementById("avgAttendance").textContent = attendanceRate + '%';
+    document.getElementById("avgGrade").textContent = avgGrade;
+}
 
           function exportRecords() {
-            let csv = 'Record ID,Employee Name,Department,Position,Training Name,Training Type,Date,Attendance,Grade,Grade Level,Assessment Type,Comments\n';
+    let csv = 'Record ID,Employee Name,Department,Position,Training Name,Training Type,Date,Attendance,Grade,Grade Level,Assessment Type,Comments\n';
 
-            trainingRecords.forEach(record => {
-                csv += `${Math.floor(record.id)},${record.employeeName},${record.department || ''},${record.position || ''},${record.trainingName},${record.trainingType},${record.attendanceDate},${record.attendance},${record.grade || ''},${record.gradeLevel || ''},${record.assessmentType || ''},"${record.comments || ''}"\n`;
-            });
+    trainingRecords.forEach(record => {
+        csv += `${Math.floor(record.id)},${record.employeeName},${record.department || ''},${record.position || ''},${record.trainingName},${record.trainingType},${record.attendanceDate},${record.attendance},${record.grade || ''},${record.gradeLevel || ''},${record.assessmentType || ''},"${record.comments || ''}"\n`;
+    });
 
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `training_records_${new Date().toISOString().split('T')[0]}.csv`;
-            a.click();
-            window.URL.revokeObjectURL(url);
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `training_records_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
 
-            alert("Records exported successfully!");
-        }
-        window.onload = function() {
-            showSection('recordAttendance');
-        };
+    alert("Records exported successfully!");
+}
+
+window.onload = function() {
+    initEventListeners();
+    showSection('recordAttendance');
+};

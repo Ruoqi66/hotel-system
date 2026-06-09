@@ -19,7 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // 从URL参数获取要显示的section
+    document.getElementById('filterEmployee').addEventListener('change', loadReviews);
+    document.getElementById('filterPeriod').addEventListener('change', loadReviews);
+    document.getElementById('filterType').addEventListener('change', loadReviews);
+    
     const urlParams = new URLSearchParams(window.location.search);
     const section = urlParams.get('section');
     if (section && document.getElementById(section)) {
@@ -143,6 +146,11 @@ document.getElementById('reviewForm').addEventListener('submit', function(e) {
     localStorage.setItem('performanceReviews', JSON.stringify(reviews));
     alert('Review submitted!');
     this.reset();
+    
+    document.querySelectorAll('.rating-stars .star').forEach(star => {
+        star.classList.remove('active');
+    });
+    
     loadReviews();
 });
 
@@ -151,12 +159,28 @@ function loadReviews() {
     const tbody = document.getElementById('reviewsList');
     tbody.innerHTML = '';
     
-    if (reviews.length === 0) {
+    const filterEmployee = document.getElementById('filterEmployee').value;
+    const filterPeriod = document.getElementById('filterPeriod').value;
+    const filterType = document.getElementById('filterType').value;
+    
+    let filteredReviews = reviews;
+    
+    if (filterEmployee) {
+        filteredReviews = filteredReviews.filter(r => r.employeeName === filterEmployee);
+    }
+    if (filterPeriod) {
+        filteredReviews = filteredReviews.filter(r => r.reviewPeriod === filterPeriod);
+    }
+    if (filterType) {
+        filteredReviews = filteredReviews.filter(r => r.evaluationType === filterType);
+    }
+    
+    if (filteredReviews.length === 0) {
         tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No performance reviews found.</td></tr>';
         return;
     }
     
-    reviews.forEach(review => {
+    filteredReviews.forEach(review => {
         const avgScore = Math.round((
             review.kpiRatings.customerSatisfaction +
             review.kpiRatings.revenueGeneration +

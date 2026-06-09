@@ -66,6 +66,10 @@ function loadEmployees() {
                 option.textContent = emp.name + ' - ' + emp.department;
                 select.appendChild(option);
             });
+            
+            select.addEventListener('change', function() {
+                loadExistingSchedule();
+            });
         }
     } catch (e) {
         console.error('Error loading employees:', e);

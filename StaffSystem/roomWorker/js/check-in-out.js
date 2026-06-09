@@ -1,20 +1,128 @@
 
+function getBookings() {
+    return JSON.parse(localStorage.getItem('bookings') || '[]');
+}
+
+function saveBookings(bookings) {
+    localStorage.setItem('bookings', JSON.stringify(bookings));
+}
+
+function getFees() {
+    return JSON.parse(localStorage.getItem('fees') || '[]');
+}
+
+function saveFees(fees) {
+    localStorage.setItem('fees', JSON.stringify(fees));
+}
+
+function generateBookingNo(id) {
+    return 'BK' + String(id).slice(-6);
+}
+
+function updateCustomerInfo(booking) {
+    const customers = JSON.parse(localStorage.getItem('customers') || '[]');
+    const existing = customers.find(c => c.phone === booking.phone);
+    if (existing) {
+        existing.checkInTimes = (existing.checkInTimes || 0) + 1;
+        existing.lastVisit = booking.checkInDate;
+        if (!existing.roomTypes.includes(booking.roomTypeName)) {
+            existing.roomTypes.push(booking.roomTypeName);
+        }
+    } else {
+        customers.push({
+            id: Date.now(),
+            name: booking.name,
+            phone: booking.phone,
+            membership: 'Regular Member',
+            checkInTimes: 1,
+            lastVisit: booking.checkInDate,
+            roomTypes: [booking.roomTypeName],
+            preferences: ''
+        });
+    }
+    localStorage.setItem('customers', JSON.stringify(customers));
+}
+
 window.addEventListener('load', function () {
+    console.log('Check-in-out page loaded');
+    console.log('getBookings function exists:', typeof getBookings === 'function');
+    console.log('localStorage bookings:', localStorage.getItem('bookings'));
     setTimeout(initCheckInOutPage, 200);
 });
+
+let previousBookingsHash = '';
 
 function initCheckInOutPage() {
     loadPendingCheckIns();
     loadCurrentGuests();
     setupCheckInOutEvents();
+    startBookingMonitor();
 }
+
+function startBookingMonitor() {
+    console.log('Booking monitor started');
+    setInterval(function() {
+        try {
+            const currentBookings = localStorage.getItem('bookings');
+            if (!currentBookings) {
+                console.log('No bookings in localStorage');
+                return;
+            }
+            
+            const currentHash = currentBookings.length + '-' + currentBookings.substring(0, 100);
+            if (currentHash !== previousBookingsHash) {
+                console.log('Bookings data changed!');
+                previousBookingsHash = currentHash;
+                
+                const bookings = JSON.parse(currentBookings);
+                console.log('Total bookings:', bookings.length);
+                console.log('Statuses:', bookings.map(b => b.status));
+                
+                loadPendingCheckIns();
+                loadCurrentGuests();
+            }
+        } catch(e) {
+            console.error('Error monitoring bookings:', e);
+        }
+    }, 2000);
+}
+
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+        console.log('Page visible, reloading data...');
+        loadPendingCheckIns();
+        loadCurrentGuests();
+    }
+});
+
+window.addEventListener('focus', function() {
+    console.log('Page focused, reloading data...');
+    loadPendingCheckIns();
+    loadCurrentGuests();
+});
 
 function loadPendingCheckIns() {
     const select = document.querySelector('#check-in-out select');
-    if (!select) return;
+    console.log('Select element found:', !!select);
+    console.log('All select elements:', document.querySelectorAll('select'));
+    
+    if (!select) {
+        console.log('Select element not found');
+        return;
+    }
 
     const bookings = getBookings();
-    const pending = bookings.filter(b => b.status === 'confirmed');
+    console.log('Total bookings in localStorage:', bookings.length);
+    
+    if (bookings.length === 0) {
+        console.log('No bookings found - checking localStorage directly:', localStorage.getItem('bookings'));
+    } else {
+        console.log('Booking statuses found:', bookings.map(b => b.status));
+    }
+    
+    const pending = bookings.filter(b => b.status && b.status.toLowerCase() === 'confirmed');
+    console.log('Pending (confirmed) bookings:', pending.length);
+    console.log('Pending bookings data:', pending);
 
     select.innerHTML = '<option value="">--Select pending check-in order--</option>';
     pending.forEach(b => {
@@ -22,6 +130,7 @@ function loadPendingCheckIns() {
         option.value = b.id;
         option.textContent = generateBookingNo(b.id) + ' | ' + b.name + ' | ' + b.roomTypeName + ' | Check-in: ' + b.checkInDate;
         select.appendChild(option);
+        console.log('Added option:', option.textContent);
     });
 }
 
@@ -73,7 +182,7 @@ function loadCurrentGuests() {
     if (!tbody) return;
 
     const bookings = getBookings();
-    const currentGuests = bookings.filter(b => b.status === 'checked-in');
+    const currentGuests = bookings.filter(b => b.status && b.status.toLowerCase() === 'checked-in');
 
     tbody.innerHTML = '';
 

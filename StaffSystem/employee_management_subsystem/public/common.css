@@ -180,6 +180,59 @@ button,
     box-shadow: 0 6px 16px rgba(79, 172, 254, 0.4);
 }
 
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 80px;
+}
+
+.status-planned {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.15);
+}
+
+.status-planned:hover {
+    background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.25);
+}
+
+.status-ongoing {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    color: #e65100;
+    border: 1px solid #ffcc80;
+    box-shadow: 0 2px 8px rgba(230, 81, 0, 0.15);
+}
+
+.status-ongoing:hover {
+    background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%);
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(230, 81, 0, 0.25);
+}
+
+.status-completed {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    color: #1565c0;
+    border: 1px solid #90caf9;
+    box-shadow: 0 2px 8px rgba(21, 101, 192, 0.15);
+}
+
+.status-completed:hover {
+    background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%);
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.25);
+}
+
 .btn-success {
     background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
     color: white;
